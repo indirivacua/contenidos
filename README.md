@@ -26,6 +26,7 @@ Para entornos Apple se puede utilizar `Vagrant`. Puede ver la definición en el 
 * Instalar Vagrant en la computadora [https://www.vagrantup.com/]
 * Ejecutar:
 
+
     # vagrant up; vagrant ssh
 
 ## Windows
