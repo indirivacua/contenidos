@@ -26,8 +26,8 @@ Para entornos Apple se puede utilizar `Vagrant`. Puede ver la definición en el 
 * Instalar Vagrant en la computadora [https://www.vagrantup.com/]
 * Ejecutar:
 
-
-    # vagrant up; vagrant ssh
+    # apt-get install git make texlive texlive-lang-spanish\
+      texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
 
 ## Windows
 En Windows NT y sus versiones derivadas se deberá descargar
