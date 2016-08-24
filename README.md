@@ -25,7 +25,7 @@ puede efectuarse mediante el siguiente comando:
 Para entornos Apple se puede utilizar `Vagrant`. Puede ver la definición en el archivo "Vagrantfile". Pasos a seguir:
 * Instalar Vagrant en la computadora [https://www.vagrantup.com/]
 * Ejecutar:
-    * vagrant up - descarga, instala y configura un ambiente "ubuntu-trusty-64" a través del provider `VirtualBox`
+    * vagrant up - descarga, instala y configura un ambiente "ubuntu-trusty-64" a través del provider por defecto `VirtualBox`
     * vagrant ssh - levanta y se conecta a la máquina virtual para poder compilar como se detalla en el "Modo de uso"
 
 ## Windows
