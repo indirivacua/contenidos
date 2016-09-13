@@ -63,7 +63,7 @@
 \begin{frame}[fragile]
   \frametitle{Características - Configuración de discos (cont.)}
   \begin{itemize}
-	  \item A futuro, todos los dispositivos llamados hdX serán denominados sdX $\leftarrow$ Introducido en Debian/Squeeze
+	  \item Desde Debian/Squeeze todos los dispositivos llamados hdX se denominan sdX 
 	  \item Por estas y otras razones se adoptan 4 mecanismos nuevos para nomenclar\footnote{\url{http://wiki.debian.org/Part-UUID}}:
 	  \begin{itemize}
 	  	\item Nombres persistentes por \textbf{UUID} (\small{Universal Unique Identifier}):
@@ -276,7 +276,7 @@ $ chmod 755 /tmp/script
 
   	\item Generalmente se utilizan los cargadores multietapas, en los que varios programas pequeños se van invocando hasta lograr la carga del SO
 
-  	\item En cierto sentido, el código del \textit{BIOS} forma parte del bootloader, pero el concepto está más orientado al código que reside en el \textit{Master Boot Record} (512b)
+  	\item En cierto sentido, el código del \textit{BIOS/UEFI} forma parte del bootloader, pero el concepto está más orientado al código que reside en el \textit{Master Boot Record} (512b)
 
   	\item El MBR está formado por el \textit{MBC} (446b) y la \textit{Tabla de Particiones} (64b)
 
@@ -433,7 +433,7 @@ S70x11-common
 \begin{frame}
   \frametitle{Proceso de arranque \textbf{Upstart}}
   \begin{itemize}
-	  	\item Upstart es el reemplazo de SystemV (\emph{Ubuntu}, \emph{Fedora}, etc.)
+	  	\item Upstart fue el primer reemplazo propuesto para SystemV (\emph{Ubuntu}, \emph{Fedora, Debian}, etc.)
 	  	\item Permite la ejecución de trabajos en forma asincrónica a través de eventos (\textit{event-based}) como principal diferencia con sysVinit que es estrictamente sincrónico (\textit{dependency-based})
 	  	\item Estos trabajos se denominan \textbf{jobs}
 		\item El principal objetivo de un job es definir servicios o tareas a ser ejecutadas por init
@@ -524,8 +524,8 @@ S70x11-common
 			\item etc.
 		\end{itemize}
 		\item Es un mecanismo de iniciación bajo demanda $\rightarrow$ podemos ofrecer una variedad de servicios sin que realmente esten iniciados
-		\item Cuando el sockect recibe una conxión spawnea el servicio y le pasa el socket
-		\item No hay necesidad de definir dependencias entre servicios $\rightarrow$ se inician todos los sockects en primer medida
+		\item Cuando el sockect recibe una conexión spawnea el servicio y le pasa el socket
+		\item No hay necesidad de definir dependencias entre servicios $\rightarrow$ se inician todos los sockets en primer medida
   	\end{itemize}
 \end{frame}
 
