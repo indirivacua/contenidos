@@ -786,7 +786,7 @@ echo 'Tampoco resultados de comandos $(ls)'
 		  return 0
 		}
 		mayor 5 6 # Invocación
-		echo $?   # Imprime el resultado
+		echo $?   # Imprime el exit Status de la funcion
 	\end{lstlisting}
 \end{frame}
 \subsection{Alcance y visibilidad}
@@ -805,7 +805,7 @@ echo 'Tampoco resultados de comandos $(ls)'
 		\item Para exponer una variable global a los procesos hijos se usa
           el comando \texttt{export}:
 		\begin{lstlisting}
-			export VARIABLE_GLOBAL="Mi var global"+.
+			export VARIABLE_GLOBAL="Mi var global"
 			comando
 			# comando verá entre sus variables de
 			# entorno a VARIABLE_GLOBAL
