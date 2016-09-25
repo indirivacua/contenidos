@@ -1,0 +1,167 @@
+\input{../../../common/preamble-beamer}
+\input{../../../common/macros}
+
+\author{Introducción a los Sistemas Operativos}
+
+\begin{document}
+
+\title{\textit{Talk Show}}
+\subtitle{Práctca 1}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Qué es una partición?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Qué es una partición?}
+  \begin{itemize}
+	  \item División lóica de un disco físico
+	  \item Separación de datos
+	  \item Organización de la información
+	  \item ¿Ventajas?
+	  \item ¿Desventajas?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Qué tipos de particiones hay?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Qué tipos de particiones hay?}
+  \begin{itemize}
+	  \item Primarias
+	  \item Extendidas
+	  \item Lógicas
+	  \item ¿Cuántas se pueden tener?
+	  \item ¿Cuáles tienen formato?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Cómo se denominan los discos y las particiones en GNU/Linux?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Cómo se denominan los discos y las particiones en GNU/Linux?}
+  \begin{itemize}
+	  \item Discos: sda, sdb, sdc, sdd
+	  \item Particiones:
+	  \begin{itemize}
+	  	\item sda1, sda2, sda3, sda4, sdb1, ...
+	  	\item sda5, sda6, ...
+	  \end{itemize}
+	  \item Según el FHS, ¿dónde se ubican los archivos que identi can los dispositivos?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Cuántas particiones \textbf{se \underline{requieren} como mínimo} para instalar GNU/Linux?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge /
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Cuántas particiones \textbf{se \underline{recomienda} tener como mínimo} para instalar GNU/Linux?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge /
+    \vfill
+    \vfill
+    \huge swap
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge Si quisieran instalar GNU/Linux para un \textbf{servidor de base de datos}.
+    \vfill
+    \vfill
+    \huge Este tipo de servicio genera \textbf{gran cantidad de datos variables}.
+    \vfill
+    \vfill
+    \huge ¿Cuántas particiones crearían? ¿cuáles y por qué?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge /
+    \vfill
+    \vfill
+    \huge swap
+    \vfill
+    \vfill
+    \huge /var
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \vfill
+    \huge ¿Qué es la \textbf{shell}?
+    \vfill
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Qué es la shel?}
+  \begin{itemize}
+    \item Es un programa
+    \item Interfaz entre el usuario y el Sistema Operativo
+    \item Tiene comandos internos
+    \item Invoca comandos externos \textbf{(\$PATH)}
+    \item Con gurable por usuario:
+    \begin{itemize}
+      \item /etc/passwd
+      \item chsh
+    \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Qué \textbf{comandos} debo ejecutar para hacer esto?}
+  \begin{center}
+     Se desea crear en el \textbf{/home} un directorio llamado \textbf{iso} y dentro de este dos más llamados \textbf{explicaciones} y \textbf{practicas}. Además se quiere mover el contenido de \textbf{/tmp/info-iso/explicaciones} a \textbf{/home/iso/explicaciones} y el de \textbf{/tmp/info-iso/practicas} a \textbf{/home/iso/practicas}
+  \end{center}
+\end{frame}
+
+\end{document}
