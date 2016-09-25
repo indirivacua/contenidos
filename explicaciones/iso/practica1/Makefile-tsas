@@ -1,3 +1,4 @@
 DEPS = presentacion-tsas.tex explicacion.tex
+NAME = main-tsas
 
-include ../../../common/Makefile-tsas.include
+include ../../../common/Makefile.include

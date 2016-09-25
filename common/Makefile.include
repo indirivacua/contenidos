@@ -1,4 +1,7 @@
-NAME = main
+ifndef NAME
+	NAME = main
+endif
+
 PDFDIR = ../../../pdf
 TEXC = pdflatex
 COMMONDEPS = ../../../common/listing.tex ../../../common/include.tex

@@ -1,3 +1,4 @@
-DEPS = presentacion.tex explicacion.tex
+DEPS = talkshow.tex
+NAME = talkshow
 
 include ../../../common/Makefile.include
