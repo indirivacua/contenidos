@@ -231,7 +231,7 @@ TAREA ''4'' PRIORIDAD=2
   \frametitle{Algoritmo con \textbf{Uso de Prioridades}}
   \begin{itemize}
   		\item Cada proceso tiene un valor que representa su prioridad $\rightarrow$ menor valor, mayor prioridad
-		\item Se selecciona el proceso de mayor prioridad de los que se encuentran ela \emph{Ready Queue}
+		\item Se selecciona el proceso de mayor prioridad de los que se encuentran en la \emph{Ready Queue}
 		\item Existe una \emph{Ready Queue} por cada nivel de prioridad
 		\item Procesos de baja prioridad pueden sufrir \emph{starvation} (inanición)
 		\begin{itemize}
@@ -352,7 +352,7 @@ TAREA ''3'' INICIO=2
 \begin{frame}
   \frametitle{Esquema \textbf{Colas Multinivel}}
   \begin{itemize}
-  		\item Scheduler actuales $\rightarrow$ combinación de algoritmos vistos
+  		\item Schedulers actuales $\rightarrow$ combinación de algoritmos vistos
 		\item La \emph{ready queue} es dividida en varias colas (similar a prioridades)		
 		\item Los procesos se colocan en las colas según una clasificación que realise el sistema operativo
 		\item Cada cola posee su propio algoritmo de planificación $\rightarrow$ \textbf{planificador horizontal}
@@ -379,7 +379,7 @@ TAREA ''3'' INICIO=2
   		\end{itemize}
   		\item Para la planificacion se utilizan los siguientes criterios:
   		\begin{itemize}
-  			\item Los procesos ingresan en la \emph{Q0}. Si no se utilizan los 8 cuantos el job es movido a la cola \emph{Q1}
+  			\item Los procesos ingresan en la \emph{Q0}. Si no se utilizan los 8 cuantos, el job es movido a la cola \emph{Q1}
   			\item Para la cola \emph{Q1}, el comportamiento es similar a \emph{Q0}. Si un proceso no finaliza su ráfaga de 16 instantes, es movido a la cola \emph{Q2}
   		\end{itemize}
   \end{itemize}
@@ -415,8 +415,8 @@ TAREA ''3'' INICIO=2
 \begin{frame}
   \frametitle{Planificación con múltiples procesadores: \textbf{Criterios}}
 	\begin{itemize}
-		\item \textbf{Planificación temporal} $\rightarrow$ que proceso ejecutar
-		\item \textbf{Planificación espacial} $\rightarrow$ en que procesador ejecutar el proceso:		
+		\item \textbf{Planificación temporal} $\rightarrow$ que proceso y durante cuanto
+		\item \textbf{Planificación espacial} $\rightarrow$ en que procesador ejecutar:		
 		\begin{itemize}
 			\item \textbf{Huella}: estado que el proceso va dejando en la cache de un procesador
 			\item \textbf{Afinidad}: preferencia de un proceso para ejecutar en un procesador 
@@ -428,7 +428,7 @@ TAREA ''3'' INICIO=2
 		\end{itemize}
 		\item La política puede ser:
 		\begin{itemize}
-			\item \textbf{Tiempo compartido}: se puede cosiderar una \emph{cola global} o una \emph{cola local} a cada procesado
+			\item \textbf{Tiempo compartido}: se puede cosiderar una \emph{cola global} o una \emph{cola local} a cada procesador
 			\item \textbf{Espacio compartido}:
 			\begin{itemize}
 				\item \textbf{Grupos} (\emph{threads})
@@ -444,7 +444,7 @@ TAREA ''3'' INICIO=2
 		\item \emph{Clasificaciones}:
 		\begin{itemize}
 			\item \textbf{Procesadores homogéneos}: todas las CPUs son iguales. No existen ventajas físicas sobre el resto
-			\item \textbf{Procesadores heterogéneos}: cada procesador tiene su propia cola y algoritmo de planificación
+			\item \textbf{Procesadores heterogéneos}: cada procesador tiene su propia cola, su propio clock y su propio algoritmo de planificación
 		\end{itemize}
 		\item \emph{Otra clasificación}:
 		\begin{itemize}

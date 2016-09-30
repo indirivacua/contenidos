@@ -539,7 +539,7 @@
 	\begin{itemize}
 		\item \textbf{GRand} \textbf{Unified} \textbf{Bootloader}: gestor de arranque múltiple más utilizado
 		\item En el MBR solo se encuentra la fase 1 del que solo se encarga de cargar la fase 1.5
-		\item Fase 1.5: ubicada en los siguientes 30 KB del disco. Carga la fase 2
+		\item Fase 1.5: ubicada en los siguientes 30 KB del disco (\textit{MBR gap}). Carga la fase 2
 		\item Fase 2: interfaz de usuario y carga el Kernel seleccionado
 		\item Se configura a través del archivo \textcolor{orange}{/boot/grub/menu.lst}
 		\item Algunas líneas:
@@ -584,7 +584,7 @@ initrd /initrd-2.6.26.img
 		\item El gestor de arranque lanzado desde el MBC carga el Kernel:
 		\begin{itemize}
 			\item Prueba y hace disponibles los dispositivos
-			\item Luegoo pasa el control al proceso \textbf{init}
+			\item Luego pasa el control al proceso \textbf{init}
 		\end{itemize}
 		\item El proceso de arranque se ve como una serie de pequeños programas de ejecución encadenada
 	\end{itemize}
@@ -622,7 +622,7 @@ initrd /initrd-2.6.26.img
 	\frametitle{GPT}
 	\begin{itemize}
 		\item Se mantiene un MBR para tener compatibilidad con el esquema BIOS
-		\item GPT usa modo de direccionamiento logico (logical block addressing \textbf{LBA}) en lugar de \textit{cylinder-header-sector}
+		\item GPT usa un modo de direccionamiento lógico (logical block addressing \textbf{LBA}) en lugar de \textit{cylinder-header-sector}
 		\item El MBR ``heredado'' se almacena en el LBA 0
 		\item En el LBA 1 está la cabecera GPT. La tabla de particiones en sí está en los bloques sucesivos
 		\item La cabecera GPT y la tabla de particiones están escritas al principio y al final del disco (redundancia)
