@@ -20,7 +20,7 @@ Ahora bien, esto va a suceder dependiendo la circunstancia, es decir dependiendo
 
 Tipos de comandos:
 
-             Interno: no crea una subshell siempre. Por ejemplo: # echo "so".
+             Interno: no siempre crea una subshell. Depende de como se ejecute el comando. Por ejemplo: # echo "so".
 
 
 
@@ -34,7 +34,7 @@ Algunas otras circunstancias posibles indistintas al tipo de comando que estemos
 
 
 
-           Uso de modo background (&): genera una subshell.
+            Uso de modo background (&): genera una subshell.
 
 
 
