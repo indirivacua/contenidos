@@ -234,6 +234,19 @@ finalizar.\\
     seleccionar \textit{Loopback device support}.
   \end{parts}
 
+  Adicionalmente puede ser necesario deshabilitar el firmado criptográfico
+  de módulos, para ello:
+  \begin{parts}
+      \part Deshabilitar \textit{Module signature verification} en la
+      opción \textit{Enable loadable module support}.
+      \part Deshabilitar \textit{Provide system-wide ring of trusted keys}
+      en la opción \textit{Cryptographic API} $\to$
+      \textit{Certificates for signature checking}.
+  \end{parts}
+  Estas últimas opciones deben deshabilitarse si al intentar compilar recibimos
+  el error:
+  \verb+make[2]: *** No rule to make target 'debian/certs/benh@debian.org.cert.pem [...]'+.
+
   La forma de movernos a través de este menú es utilizando las flechas del
   cursor, la tecla \textit{Enter} y la barra espaciadora. A través de esta
   última podremos decidir sobre determinada opción si la misma será
