@@ -33,7 +33,7 @@
   \begin{itemize}
   \item Son llamados al kernel para ejecutar una función específica que controla un dispositivo o ejecuta una instrucción privilegiada 
   \item Su próposito es proveer una interfaz común para lograr portabilidad
-  \item Su funcionalidad la ejecuta el Kernel   
+  \item Su funcionalidad se ejecuta en modo Kernel pero en contexto del proceso
   \item Recordar  
   \begin{itemize}
     \item Cambio de Modo
@@ -100,7 +100,7 @@ void main(void){
     
    \item Interrupción enmascarable int 0x80 en Linux.
    \begin{itemize}  
-   \item \texttt{Se usa el vector 0x80 para transferir el control al kernel. Este vector de interrupción esta inicializado durante el startup del sistema.}
+   \item \texttt{Se usa el vector 0x80 para transferir el control al kernel. Este vector de interrupción esta inicializado durante el startup del sistema [\href{https://www.quora.com/What-happens-once-a-system-call-is-made-by-a-process-in-user-space}{ref}].}
  \end{itemize}
     \item Una librería de espacio de usuario(libc) carga el índice de la system call y sus argumentos, la interrupción enmascarable por software 	0x80 es invocada, la cual resulta en el cambio de modo.	
    \item A través de la estructura sys\_call\_table y el registro eax como índice se determina que \emph{handler function} invocar.
@@ -156,9 +156,9 @@ movl %edx,_errno
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{System Calls en GNU Linux}
+\begin{frame}{Desarrollando una System Calls en GNU Linux}
    \begin{itemize}  
-   \item Debemos declarar nuestra syscall por un número único(syscall number). 
+   \item Debemos identificar nuestra syscall por un número único(syscall number). 
    \item Agregamos una entrada a la syscall table.
    \item Debemos considerar el sys call number.
    \item Ver que el código fuente organizado por arquitectura.
@@ -177,9 +177,9 @@ movl %edx,_errno
 \end{frame}
 
 
-\begin{frame}{System Calls en GNU Linux(Cont.)}
+\begin{frame}{Desarrollando una System Calls en GNU Linux}
    \begin{itemize}  
-   \item Debemos definir el prototipo de nuestra system call 
+   \item Debemos declarar nuestra system call (prototipo de de la syscall)
    \item Los parámetros a system calls deben ser realizados por medio del stack
    \item Informamos de esto al compilador mediante la macro asmlinkage
     \begin{itemize}
@@ -195,9 +195,9 @@ asmlinkage long sys\_newcall(int i);
 
 \end{frame}
 
-\begin{frame}{System Calls en GNU Linux (cont.)}
+\begin{frame}{Desarrollando una System Calls en GNU Linux}
    \begin{itemize}  
-   \item Debemos nuestra syscall en algún punto del árbol de fuentes. 
+   \item Debemos definir nuestra syscall en algún punto del árbol de fuentes. 
    \item Podemos utilizar algún archivo existente.
    \item Podemos incluir un nuevo archivo y su correspondiente Makefile. 
    \begin{itemize}
@@ -206,18 +206,18 @@ asmlinkage long sys\_newcall(int i);
  \end{itemize}
 
 \begin{block}{En algún archivo ya incluido en los fuentes del Kernel...}
-asmlinkage int sys\_newcall(int a) { \\
-	printk(``calling newcall... '');   \\
-  return a+1; \\
-}
+asmlinkage int sys\_newcall(int a) \{ \\
+	  printk(``calling newcall... '');   \\
+    return a+1; \\
+\}
 \end{block}
-   \begin{itemize}
-	 \item \alert{¿printk?}, ¿porque no printf? 
-    \end{itemize}   
+\begin{itemize}
+  \item \alert{¿printk?}, ¿porque no printf? 
+\end{itemize}   
 
 \end{frame}
 
-\begin{frame}{System Calls en GNU Linux(Cont...)}
+\begin{frame}{Desarrollando una System Calls en GNU Linux}
    \begin{itemize}  
    \item \textbf{Recompilar el Kernel!}
     \begin{itemize}
@@ -243,7 +243,7 @@ asmlinkage int sys\_newcall(int a) { \\
 #define sys_newcall 351
 int main(void) {
   int i = syscall(sys_newcall,1);
-  printf ("El resultado es:\n", i);
+  printf ("El resultado es:%d\n", i);
 }
 \end{lstlisting}
 \end{frame}
@@ -256,11 +256,12 @@ int main(void) {
     \item Opción útil -f (tiene en cuenta procesos hijos)  
  \end{itemize}
 \begin{block}{strace a.out (hola mundo)}
-execve("./a.out", ["./a.out"], [/* 62 vars */]) = 0 \\
-brk(0)                                  = 0x1295000 \\
-access("/etc/ld.so.nohwcap", F\_OK)      = -1 ENOENT (No such file or directory)\\
-mmap(NULL, 8192, PROT\_READ|PROT\_WRITE, MAP\_PRIVATE|MAP\_ANONYMOUS, -1, 0) = 0x7f3b70b43000\\
-access("/etc/ld.so.preload", R\_OK)      = -1 ENOENT (No such file or directory)\\
+execve("./syscall.o", ["./syscall.o"], [/* 19 vars */]) = 0 \\
+... \\
+mmap(NULL, 8192, PROT\_READ|PROT\_WRITE, MAP\_PRIVATE|MAP\_ANONYMOUS, -1, 0) = 0x7f12ea552000 \\
+... \\
+write(1, "hola mundo!", 11hola mundo!)             = 11 \\
+... \\
 
 \end{block}
 \end{frame}
@@ -271,7 +272,7 @@ access("/etc/ld.so.preload", R\_OK)      = -1 ENOENT (No such file or directory)
    \item Realizar un parche que contenga los cambios asociados a la siguiente \textit{system call}: 
    \begin{itemize}
       \item Simplemente debe imprimir el texto ``Hello world'' a través de la función \textit{printk}
-      \item Se debe hacer sobre la la \emph{4.4.6}
+      \item Se debe hacer sobre la versión utilizada en la práctica anterior
     \end{itemize}
     \item Tips:
     \begin{itemize}
@@ -330,7 +331,7 @@ obj-y = ...
 #define __NR_MYSYSCALL -num-syscall-
 
 int main() {
-  printf("Invocando system call\n");
+  printf("Invocando system call...\n");
   return syscall(__NR_MYSYSCALL);
 }
   \end{lstlisting}
@@ -349,7 +350,6 @@ $ diff -urpN linux-4.4.6 linux-4.4.6-modificado > patch-4.4.6-so2016
   \end{lstlisting}
   \textcolor{red}{¡No olvidar ejecutar!}:
   \begin{lstlisting}
-$ make clean
 $ make mrproper
   \end{lstlisting}  
 \end{frame}
