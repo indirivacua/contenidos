@@ -11,7 +11,7 @@
     \item Administración de \alert{uso de la CPU}
     \end{itemize}
   \item Es de código abierto a los usuarios \alert{(kernel/sched.c)}
-  \item En una misma estructura de código fuente se da soporte a \alert{todass las arquitecturas}
+  \item En una misma estructura de código fuente se da soporte a \alert{todas las arquitecturas}
   \item Liberado bajo licencia GPLv2  
   \item En un sentido estricto es el Sistema Operativo
   \end{itemize}
@@ -421,6 +421,24 @@ Las herramientas mencionadas permiten:
 \end{block}
 \end{frame}
 
+\begin{frame}[fragile]{Consideración: certificados de seguridad}
+\begin{itemize}
+    \item A partir de la versión 3.7 del kernel existe la posibilidad de
+        firmar criptográficamente los módulos del kernel.
+    \item Esto puede fallar al utilizar un archivo .config basado en
+        el de distribuciones como Debian GNU/Linux que asumen que
+        habrá un par de claves generadas en un directorio específico.
+    \item Para evitar este problema deshabilitaremos las opciones:
+        \begin{lstlisting}
+--- Enable loadable module support
+[ ]   Module signature verification
+--- Cryptographic API
+    --- Certificates for signature checking
+    [ ] Provide system-wide ring of trusted keys
+        \end{lstlisting}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Configurar el \textit{kernel} (Modulos)}
 ¿Qué es un modulo del Kernel?
 \begin{itemize}
@@ -544,7 +562,7 @@ El comando \texttt{make modules} compila todos los módulos necesarios para sati
 
   { \tiny
   \begin{block}{Ejemplo con arquitectura \textit{i386}}
-    \texttt{\$ cd \KERNELSOURCEPATH/linux-\KERNELVERSION \\
+    \texttt{\$ cd \KERNELSOURCEPATH/linux-\KERNELBASEVERSION \\
 \$ sudo su \\
 \# cp arch/i386/boot/bzImage /boot/vmlinuz-\PATCHEDKERNELVERSION \\
 \# cp System.map /boot/System.map-\PATCHEDKERNELVERSION \\
@@ -704,6 +722,6 @@ es la 3.16.
 # uname -r | md5sum
     \end{lstlisting}
     \item Pegar el texto devuelto en la tarea que se publicará para tal fin en el sitio de la cátedra
-    \item ¡Tienen tiempo hasta el Lunes 18 a las 15:00 horas!
+    \item ¡Tienen tiempo hasta el Lunes 10 a las 15:00 horas!
  \end{itemize}
 \end{frame}
