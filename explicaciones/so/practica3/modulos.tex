@@ -14,28 +14,28 @@
 
 \begin{frame}{Comandos relacionados}
   \begin{itemize}
-  \item lsmod 
+  \item \texttt{lsmod} 
   	\begin{itemize}
   	  \item Lista los módulos cargados (es equivalente a cat /proc/modules) 
   	\end{itemize} 
-  \item rmmod
+  \item \texttt{rmmod}
   	\begin{itemize}
   	  \item Descarga uno o más módulos 
   	\end{itemize} 
-  \item modinfo   
+  \item \texttt{modinfo}   
 	  \begin{itemize}
 	    \item  Muestra información sobre el módulo 
 	  \end{itemize} 
- \item insmod
+ \item \texttt{insmod}
 	  \begin{itemize}
 	    \item Trata de cargar el módulo especificado 
 	  \end{itemize} 
- \item depmod
+ \item \texttt{depmod}
 	  \begin{itemize}
 	    \item Permite calcular las dependencias de un módulo
              \item depmod -a escribe las dependencias en el archivo /lib/modules/version/modules.emp  
 	  \end{itemize} 
- \item modprobe    
+ \item \texttt{modprobe}    
  	\begin{itemize}
              \item Emplea la información generada por depmod e información de /etc/modules.conf 
              para cargar el módulo especificado. 
@@ -83,8 +83,8 @@ void cleanup_module(void){
   \begin{itemize}
   \item También podemos indicarle otras funciones.
  	 \begin{itemize}
- 	   \item module\_init
-	   \item module\_exit
+ 	   \item \texttt{module\_init()}
+	   \item \texttt{module\_exit()}
  	 \end{itemize} 
   \end{itemize}
 
@@ -99,17 +99,50 @@ void cleanup_module(void){
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
-static int hello_2_init(void){
-	printk(KERN_INFO "Hello, world 2\n");
+static int hello_init(void){
+	printk(KERN_INFO "Hello! \n");
 return 0;}
 
-static void hello_2_exit(void){
-printk(KERN_INFO "Goodbye, world 2\n");}
+static void hello_exit(void){
+printk(KERN_INFO "Goodbye! \n");}
 
-module_init(hello_2_init);
-module_exit(hello_2_exit);
+module_init(hello_init);
+module_exit(hello_exit);
 \end{lstlisting}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parámetros de un módulo}
+  \begin{itemize}
+  \item Se definen con la macro \texttt{module\_param}
+  \begin{itemize}
+   \item \texttt{name:} Es el nombre del parámetro expuesto al usuario y de la variable que contiene el parámetro en nuestro módulo
+   \item \texttt{type:} byte, short, ushort, int, uint, long, ulong ,charp ,bool, invbool
+   \item \texttt{perm:} Especifica los permisos al archivo correspondiente al módulo el sysfs
+  \end{itemize}
+
+  \end{itemize}
+\lstset{language=C,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+\begin{lstlisting}
+static char *user_name = "";
+module_param(user_name, charp, 0);  
+MODULE_PARM_DESC(user_name,"user name");
+\end{lstlisting}
+
+Al cargar el módulo indicamos el valor del parámetro:
+
+\begin{lstlisting}
+    $ sudo insmod hello.ko user_name=colo
+\end{lstlisting}
+
+\end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{¿Como compilamos un módulo?}
@@ -132,7 +165,9 @@ make -C /lib/modules/$(shell uname -r)/build M=$(pwd) clean
 
 \end{frame}
 
-\begin{frame}{¿Que son los \textit{Dispositivos}?}
+
+
+\begin{frame}{\textit{Dispositivos}}
   \begin{itemize}
 	\item Entendemos por dispositivo a cualquier dispositivo de hard: discos, memoria, mouse, etc
 	\item Cada operación sobre un dispositivo es llevada por código específico para el dispositivo
@@ -274,7 +309,7 @@ unregister_chrdev(major_number, "myDriver");
   \begin{itemize}
   \item Operaciones sobre el dispositivo  
   \begin{itemize}
-    \item Escritura del archivo de dispositivo (Ej. echo ``hi'' > /dev/myDeviceFile) 
+    \item Escritura del archivo de dispositivo (Ej.  echo ``hi'' > /dev/myDeviceFile) 
   \end{itemize}	
   \end{itemize}
 \lstset{language=C,
@@ -305,6 +340,7 @@ ssize_t myDriver_read(struct file *filp, char *buf,size_t count, loff_t *f_pos)
 \end{frame}
 
 \begin{frame}{¿Como creamos un driver? (cont.)}
+
   \begin{itemize}
   \item Parámetros de las funciones funciones:
  	 \begin{itemize}
@@ -315,6 +351,126 @@ ssize_t myDriver_read(struct file *filp, char *buf,size_t count, loff_t *f_pos)
  	 \end{itemize}  
   \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ejemplo de Módulos - Implementación}
+     Sección "Desarrollando un Driver" de la Práctica 3(Ejercicio guiado) 
+\end{frame}
+
+
+\begin{frame}{Mecanismo alternativo: /proc}
+  \begin{itemize}
+       \item El /proc es un sistema de ficheros virtual
+        \begin{itemize}
+            \item No ocupa espacio en disco
+          \end{itemize}
+        \item Al leer o escribir en un archivo  de este sistema del /proc se ejecuta una función del kernel que devuelve o recibe los datos
+         \begin{itemize}
+            \item Lectura: read callback
+            \item Escritura: write callback
+         \end{itemize}
+        \item En Linux, /proc muestra información de los procesos, uso de memoria, módulos, hardware, ... 
+   \end{itemize}
+    \begin{block}{\textcolor{red}{Mecanismo de interacción entre el usuario y el kernel}}
+           Los módulos pueden crear entradas /proc para interactuar con el usuario
+       \end{block}  
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Mecanismo alternativo: /proc}
+  \begin{itemize}
+         \item Crear un módulo del kernel con funciones \texttt{init\_module()} y \texttt{cleanup\_module()} 
+         \item Definir variable global de tipo struct \texttt{file\_operations}
+  \begin{itemize}
+          \item Especifica qué operaciones en el /proc se implementan y su asociación con las funciones del módulo
+ \lstset{language=C,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+\begin{lstlisting}
+struct file_operations fops = {
+.read = myproc_read,
+.write = myproc_write,
+};
+\end{lstlisting}
+  \end{itemize}	
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Mecanismo alternativo: /proc}
+  \begin{itemize}
+         \item En la función de inicialización, crear la entrada del /proc con la función \texttt{proc\_create()}:
+ \lstset{language=C,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+\begin{lstlisting}
+struct proc_dir_entry *proc_create(const char *name,umode_t mode,struct proc_dir_entry *parent,const struct file_operations *ops);
+\end{lstlisting}
+    \item Parámetros:
+      \begin{itemize}
+        \item \texttt{name}: Nombre de la entrada
+        \item \texttt{mode}: Máscara octal de permisos (p.ej., 0666)
+        \item \texttt{parent}: Puntero al directorio padre (NULL → directorio raíz)
+        \item \texttt{ops}: Puntero a la estructura que define las operaciones
+      \end{itemize}
+    \item En la función cleanup del módulo, eliminar la entrada /proc creada
+ \lstset{language=C,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+\begin{lstlisting}
+void remove_proc_entry(const char *name,struct proc_dir_entry *parent);
+\end{lstlisting}
+ \end{itemize}	
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ejemplo de /proc - Implementación}
+
+      \begin{block}{\textcolor{red}{/proc}}
+           Módulo que se comunica con el espacio de usuario a través de una entrada del /proc(analizar el código)
+       \end{block} 
+
+  
+    Utilizar:
+       \begin{enumerate}
+          \item \href{https://github.com/colo76/kernel-programming/blob/master/proc_dir/modulo_so.c}{Archivo .c}
+          \item \href{https://github.com/unlp-so/contenidos/blob/master/explicaciones/so/practica3/experiment/Makefile}{Makefile}
+       \end{enumerate}
+	Lo compilamos:
+		\begin{lstlisting}
+		$ sudo make
+		$ insmod modulo_so.ko
+		\end{lstlisting}
+
+		Escribimos y leemos al /proc/module\_so y analizamos el log
+           	\begin{lstlisting}
+		$ cat miArchivo > /proc/module_so
+$ dmesg
+$ cat /proc/module_so
+$ dmesg
+		\end{lstlisting}
+               
+
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{EXPERIMENTO - Explicación}
@@ -336,7 +492,7 @@ ssize_t myDriver_read(struct file *filp, char *buf,size_t count, loff_t *f_pos)
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{EXPERIMENTO - Implemetación}
+\frametitle{EXPERIMENTO - Implementación}
   \begin{itemize}
     \item Utilizar:
        \begin{itemize}
