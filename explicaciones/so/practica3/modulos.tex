@@ -144,8 +144,8 @@ Al cargar el módulo indicamos el valor del parámetro:
 \end{frame}
 
 
-\begin{frame}[fragile]
 \frametitle{¿Como compilamos un módulo?}
+\begin{frame}[fragile]
   \begin{itemize}
   \item Construimos el Makefile
   \end{itemize}
@@ -309,7 +309,10 @@ unregister_chrdev(major_number, "myDriver");
   \begin{itemize}
   \item Operaciones sobre el dispositivo  
   \begin{itemize}
-    \item Escritura del archivo de dispositivo (Ej.  echo ``hi'' > /dev/myDeviceFile) 
+    \item Escritura del archivo de dispositivo 
+      \begin{lstlisting}
+      echo "hi" > /dev/myDeviceFile
+      \end{lstlisting}  
   \end{itemize}	
   \end{itemize}
 \lstset{language=C,
@@ -324,7 +327,10 @@ ssize_t myDriver_write(struct file *filp, char *buf,size_t count, loff_t *f_pos)
 \end{lstlisting}
 
 \begin{itemize}
-  \item Lectura del archivo de dispositivo  (Ej. cat /dev/myDeviceFile)  
+  \item Lectura del archivo de dispositivo  
+      \begin{lstlisting}
+      cat /dev/myDeviceFile
+      \end{lstlisting}  
  \end{itemize}
 
 \lstset{language=C,
@@ -344,10 +350,10 @@ ssize_t myDriver_read(struct file *filp, char *buf,size_t count, loff_t *f_pos)
   \begin{itemize}
   \item Parámetros de las funciones funciones:
  	 \begin{itemize}
- 	   \item struct file: Estructura del kernel que representa un archivo abierto.
-	   \item char *buf: El dato a leer o a escribir desde/hacia el dispositivo(espacio de usuario) 
-	   \item size\_t count: La longitud de a leer de \texttt{buf}.
-           \item loff\_t *f\_pos count: La posición actual en el archivo
+ 	   \item \texttt{struct file}: Estructura del kernel que representa un archivo abierto.
+	   \item \texttt{char *buf}: El dato a leer o a escribir desde/hacia el dispositivo(espacio de usuario) 
+	   \item \texttt{size\_t count}: La longitud de a leer de \texttt{buf}.
+           \item \texttt{loff\_t *f\_pos}: La posición actual en el archivo
  	 \end{itemize}  
   \end{itemize}
 \end{frame}
