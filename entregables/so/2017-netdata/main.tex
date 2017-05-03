@@ -1,0 +1,55 @@
+\documentclass[a4paper,11pt]{exam}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true
+}
+
+
+% Better way of getting the number and title?
+\def\exnum{``Monitoreo de estructuras del kernel''}
+
+% Common includes
+\input{../../../common/include-deliverable-so}
+\input{../../../common/listing}
+\input{../../../common/macros}
+
+\runningheader{\footnotesize{UNLP \textbar \textsc{Facultad de
+    Informática}}}{}{\footnotesize{\subjectshort\ \the\year\ \textbar
+\hspace{0.1cm} Ejercicio Entregable \exnum}}
+
+%% La tipografía tiene que soportar tildes, no todas lo hacen %%
+\usepackage{courier}    % Courier para tipografía monoespaciada
+\usepackage[T1]{fontenc}
+
+%% Los listings precisan parámetros especiales, sino puede fallar la generación del PDF %%
+\lstset{
+     extendedchars=true,
+     inputencoding=utf8,
+     literate={á}{{\'a}}1
+           {é}{{\'e}}1
+           {í}{{\'i}}1
+           {ó}{{\'o}}1
+           {ú}{{\'u}}1
+           {ñ}{{\~n}}1,
+}
+
+% May the document begin.
+\begin{document}
+\maketitle
+
+\input{introduction}
+
+\vspace{\interline}
+
+\textbf{Fecha de entrega:} 10/06
+
+\vspace{\interline}
+
+\input{guidelines}
+
+\vspace{\interline}
+
+\input{miniguide}
+
+\end{document}

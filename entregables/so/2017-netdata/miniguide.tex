@@ -1,0 +1,86 @@
+\section{Miniguía para crear la system call}
+
+De forma similar a la práctica se recomienda agregar la implementación de
+la system call a un archivo
+existente del kernel según sea conveniente. Para este caso una posibilidad es
+agregarla en \texttt{net/socket.c} ya que este archivo incluye los archivos
+\texttt{.h} necesarios para acceder a los dispositivos de red.
+
+Serán de interés para esta práctica los siguientes tipos declarados en\\
+\texttt{include/linux/netdevice.h}:
+
+\begin{description}
+    \item [struct net\_device]: Cada interfaz de red tiene asociada una
+    estructura de este tipo.
+    \item [struct net\_device\_stats]: Dentro de cada
+        estructura \verb+struct net_device+ un campo \verb+stats+ contiene una
+        estructura de este tipo con todos los datos necesarios para este
+        trabajo.
+\end{description}
+
+Investigar estos tipos de datos mencionados, la estructura \textit{init\_net} y
+las macros \texttt{first\_net\_device} y \texttt{next\_net\_device}. Estos
+serán necesarios para obtener la información pedida por el enunciado.
+
+Considerar que el kernel cuenta con sus propias implementaciones de
+\texttt{strcmp} y \texttt{strncmp} que pueden resultar útiles a la hora de
+identificar \textit{eth0}.
+
+Se recomienda que la system call a implementar reciba como argumento un puntero
+a una estructura de tipo \verb+“struct net_device_stats”+ donde se cargarán los
+datos de la interfaz en caso de éxito.
+
+Nota 1: Al declarar el prototipo de la system call en syscalls.h será necesario
+incluir “linux/netdevice.h”.
+
+Nota 2: Usar un sistema de la misma
+arquitectura que el kernel (todo de 32 bits o todo de 64 bits). De otra manera
+se complejiza la copia de las estructuras de datos desde el kernel hacia el
+espacio de usuario y la declaración de la system call.
+
+\section{Miniguía para crear plugins de netdata}
+
+Es posible crear plugins para netdata en cualquier lenguaje, la forma de enviar
+la información es escribiendo en stdout. Sin embargo, en esta práctica es
+necesario invocar a una System Call personalizada, por lo que la forma más
+directa de hacerlo será usando el lenguaje C.
+
+Cada plugin será ejecutado como un programa normal, una sola vez cuando netdata
+arranca, se espera que al arrancar el programa defina los gráficos para los que
+proveerá datos (CHARTs) y las curvas o datos que proveerá para cada gráfico
+(DIMENSIONs). Una vez iniciado, el programa deberá ejecutarse continuamente
+imprimiendo datos a intervalos regulares.
+
+El siguiente es un ejemplo de un plugin externo en C que grafica datos
+aleatorios:
+\lstinputlisting[frame=lrtb,language=C]{ejemplo_plugin.c}
+
+
+Adicionalmente es posible inspeccionar otros plugins de ejemplo en el código
+fuente de netdata.
+
+Para instalar el plugin alcanza con compilarlo con un nombre que termine en
+“.plugin” y guardarlo en el directorio \texttt{/usr/libexec/netdata/plugins.d}
+(si es que se instaló netdata en el directorio raíz). Luego, será necesario
+reiniciar netdata:
+
+\begin{lstlisting}[frame=lrtb]
+killall netdata; sleep 0.5; netdata
+\end{lstlisting}
+
+Nota: Si se utiliza una estructura de tipo \verb+struct net_device_stats+
+para copiar los datos al espacio de usuario será
+necesario copiar su declaración al plugin (no es posible incluir
+\texttt{linux/netdevice.h} desde un programa de usuario sin mayores problemas).
+\section{Más documentación y referencias útiles}
+
+
+\begin{itemize}
+    \item \url{https://github.com/firehol/netdata/tree/master/plugins.d}
+    \item \url{https://github.com/firehol/netdata/wiki/External-Plugins}
+    \item \url{https://my-netdata.io/} y \url{https://github.com/firehol/netdata}
+    \item \url{https://www.ibm.com/developerworks/library/l-kernel-memory-access/}
+    \item \url{https://www.kernel.org/doc/html/latest/process/adding-syscalls.html}
+\end{itemize}
+
+

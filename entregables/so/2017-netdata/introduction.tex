@@ -1,0 +1,29 @@
+Este trabajo consiste en modificar la herramienta \textit{netdata} para
+graficar
+información de la interfaz de red \textit{eth0} utilizando una system call
+personalizada que copie la información necesaria a espacio de usuario.
+La system call deberá acceder a las estructuras de datos internas del kernel
+para obtener la información.
+
+Se pide graficar:
+\begin{itemize}
+	\item Paquetes recibidos y transmitidos,
+	\item Errores.
+	\item Paquetes descartados (dropped).
+	\item Multicasts.
+	\item Colisiones.
+\end{itemize}
+
+La herramienta
+\textit{netdata}\footnote{\url{https://github.com/firehol/netdata}}%
+~\footnote{\url{http://london.my-netdata.io/default.html}}
+permite monitorear en tiempo real una serie de datos del sistema. Para ello
+cuenta con distintos plugins que implementan el acceso a la información y el
+método para graficarla. Es posible desarrollar plugins para netdata utilizando
+diferentes lenguajes: BASH, Python, Perl, node.js, Java, Go, Ruby, entre otros.
+También, es posible implementar plugins binarios con C. En este documento se
+describe como crear un plugin en C utilizando la API para plugins externos.
+
+El primer paso será implementar una System Call de forma similar a la generada
+en la práctica 3. Luego será necesario escribir un plugin para netdata que
+utilice esta system call y permita graficar sus datos con esta herramienta.
