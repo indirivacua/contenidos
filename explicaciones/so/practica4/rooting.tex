@@ -12,7 +12,7 @@
 
 \subsection{Bootloader}
 \begin{frame}
-  \frametitle{Bootloader - Definición}
+  \frametitle{Bootloader - Definición \href{https://forum.xda-developers.com/wiki/Bootloader\#Locked.2Funlocked\_bootloaders}{[ref]}}
   \begin{itemize}
       \item Inicializa el hardware y carga el \textit{initramfs}.
       
@@ -31,16 +31,23 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Bootloader - Fastboot}
   \begin{itemize}
       \item Protocolo USB.
       
       \item Permite bootear customs ROMs.
       
-      \item Permite flashear una partición.     
+      \item Permite flashear una partición.
+    \begin{lstlisting}
+fastboot flash boot out/target/product/hikey/boot.img
+    \end{lstlisting}
       
-      \item Permite desbloquear el bootloader (solo si el dispositivo lo soporta).      
+      \item Permite desbloquear el bootloader (solo si el dispositivo lo soporta).
+    \begin{lstlisting}
+fastboot oem unlock
+    \end{lstlisting}
+
   \end{itemize}
 \end{frame}
 

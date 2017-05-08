@@ -4,7 +4,7 @@
 \begin{frame}
   \frametitle{Principales características}
   \begin{itemize}
-    \item Android corre sobre Linux (v3.10 - \textit{LTS}).
+    \item Android corre sobre Linux (v4.4.1).
     
     \item Android se aprovecha de Linux para:
       \begin{itemize}
@@ -41,15 +41,13 @@
 
 \subsection{Versionado}
 \begin{frame}
-  \frametitle{Versionado}
+  \frametitle{Versionado \href{https://es.wikipedia.org/wiki/Anexo:Historial\_de\_versiones\_de\_Android}{[ref]}}
   \begin{itemize}
-    \item Diversas versiones.    
+    \item Diversas versiones simbólicas y númericas.
     
     \item Nombre de dulces.
     
-    \item Reparación de bugs y agregación de funciones.    
-    
-    \item v3.0 (Honeycomb), v4.4 (KitKat), v5.1 (Lollipop), v6.0 (Marshmallow), v7.0 (N).
+    \item v3.0 (Honeycomb), v4.4 (KitKat), v5.1 (Lollipop), v6.0 (Marshmallow), v7.0 (Nougat), v8.0 (Oreo).
   \end{itemize}
 \end{frame}
 
@@ -57,13 +55,13 @@
 \begin{frame}
   \frametitle{Stack}
   \begin{figure}
-      \includegraphics[scale=0.4]{images/stack.jpg}
+      \includegraphics[scale=0.1]{images/stack2.png}
   \end{figure}
 \end{frame}
 
 \subsection{Procesos e Hilos}
 \begin{frame}
-  \frametitle{Procesos e Hilos - Componentes}
+  \frametitle{Procesos e Hilos - Componentes \href{https://developer.android.com/guide/components/index.html}{[ref]}}
   \begin{itemize}
     \item Componentes: \textit{activity}, \textit{service}, etc.
 
@@ -102,7 +100,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Procesos e Hilos - Dalvik Virtual Machine}
+  \frametitle{Procesos e Hilos - DVM/ART}
   \begin{itemize}
       \item Individualizada por cada aplicación.
       
@@ -117,15 +115,15 @@
   \end{itemize}
 \end{frame}
 
-\subsection{DVM vs. JVM}
+\subsection{DVM/ART vs. JVM}
 \begin{frame}
-  \frametitle{DVM vs. JVM}  
+  \frametitle{DVM/ART vs. JVM}  
   \begin{table}
       \centering
       \resizebox{\textwidth}{!}{
     \begin{tabular}{| c | c |}
         \hline
-        \bf DVM & \bf JVM \\
+        \bf DVM/ART & \bf JVM \\
         \hline
         Máquina basada en registros & Máquina basada en stack \\
         \hline
@@ -140,6 +138,14 @@
     \end{tabular}
       }
   \end{table}
+
+  Mejoras de \textit{ART} \href{https://source.android.com/devices/tech/dalvik/}{[ref]}:
+  \begin{itemize}
+      \item Incorporación de compilación \textit{Ahead-of-time} (AOT) además de la compilación \textit{just-in-time} (JIT) existente.
+      
+      \item Optimización del garbage collection (GC).
+  \end{itemize}
+
 \end{frame}
 
 \subsection{Aplicaciones}
@@ -258,7 +264,7 @@
 
     \item Se emiten certificados auto-firmados (\textit{KeyTool}):
     \begin{itemize}
-  \item Debug mode $\rightarrow$ \textit{debug key} $\rightarrow$ el \textit{keystore} se crea automáticamente (\textit{\$HOME/.android}).
+  \item Debug mode $\rightarrow$ \textit{debug key} $\rightarrow$ el \textit{keystore} se crea automáticamente (\textit{\$HOME/.android/debug.keystore}).
   
   \item Release mode $\rightarrow$ \textit{developer's private key} $\rightarrow$ manualmente.
     \end{itemize}    
@@ -295,7 +301,7 @@
     \item \textit{/data/data/$<$package\_name$>$/databases/}
       \end{itemize}
       
-      \item Shared preferences
+      \item Shared preferences \href{https://developer.android.com/guide/topics/data/data-storage.html}{[ref]}
       \begin{itemize}
     \item Se puede manejar una colección de ellas.
     
@@ -303,7 +309,7 @@
     
     \item Se identifican a través del nombre que se le da al archivo.
     
-    \item Pueden ser privadas (\textit{MODE\_PRIVATE}) o compartidas (\textit{MODE\_WORLD\_READABLE} o \textit{MODE\_WORLD\_WRITEABLE}).
+    \item Pueden ser privadas (\textit{MODE\_PRIVATE}) o compartidas (\textit{MODE\_WORLD\_READABLE} o \textit{MODE\_WORLD\_WRITEABLE}). Desde v7.0 $\rightarrow$ \textit{FileProvider}.
     
     \item \textit{/data/data/$<$package\_name$>$/shared\_prefs/}
       \end{itemize}
@@ -316,7 +322,7 @@
   \begin{itemize}
       \item Raw NAND flash:
       \begin{itemize}
-    \item Subsistema \textit{MTD}.
+    \item Subsistema \textit{MTD} (Memory Tecnology Device).
     
     \item \textit{/dev/block/mtdblockN}
     
@@ -329,9 +335,9 @@ mtd2: 04000000 00020000 "cache"
     \end{lstlisting}
       \end{itemize} 
       
-      \item SD, MicroSD y eMMC:
+      \item SD, MicroSD y eMMC (Flash Translation Layer):
       \begin{itemize}
-    \item Driver \textit{mmcblock}.
+    \item Driver \textit{mmcblock} (Multimedia Card Block).
     
     \item \textit{/dev/block/mmcblk[chip number]p[partition number]}
     
