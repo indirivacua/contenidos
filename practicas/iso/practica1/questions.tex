@@ -7,7 +7,7 @@
   puntos mencionados en el inciso \textit{a}.
   \part ¿Qué es \textbf{GNU}?
   \part Indique una breve historia sobre la evolución del proyecto \textit{GNU}
-  \part Explique que es la multitarea, e indique si \textit{GNU/Linux} hace uso de ella.
+  \part Explique qué es la multitarea, e indique si \textit{GNU/Linux} hace uso de ella.
   \part ¿Qué es \textbf{POSIX}?
 \end{parts}
 
@@ -16,7 +16,7 @@
   \part ¿Qué es una distribución de \textit{GNU/Linux}? Nombre al menos 4 distribuciones de
   \textit{GNU/Linux} y cite diferencias básicas entre ellas.
   \part ¿En qué se diferencia una distribución de otra?
-  \part ¿Qué es \textbf{Lihuen}? Acceda al sitio \footnote{\url{http://lihuen.linti.unlp.edu.ar}} e indique cuáles son
+  \part ¿Qué es \textbf{Debian}? Acceda al sitio \footnote{\url{https://www.debian.org/intro/about}} e indique cuáles son
   los objetivos del proyecto y una breve cronología del mismo
 \end{parts}
 
@@ -31,8 +31,7 @@
   \part ¿Qué es? Indique una breve reseña histórica acerca de la evolución del Kernel de
   \textit{GNU/Linux}.
   \part ¿Cuáles son sus funciones principales?
-  \part ¿Cuál es la versión actual? ¿Cómo se definía el esquema de versionado del Kernel en versiones anteriores a la 2.4? ¿Qué cambio en el versionado se impuso a partir de
-  la versión 2.6?
+  \part ¿Cuál es la versión actual? ¿Cómo se definía el esquema de versionado del Kernel en versiones anteriores a la 2.4? ¿Qué cambió en el versionado se impuso a partir de la versión 2.6?
   \part ¿Es posible tener más de un Kernel de \textit{GNU/Linux} instalado en la misma máquina?
   \part ¿Dónde se encuentra ubicado dentro del File System?
   \part ¿El Kernel de \textit{GNU/Linux} es monolítico? Justifique.
@@ -56,16 +55,16 @@
   \part Mencione sistemas de archivos soportados por \textit{GNU/Linux}.
   \part ¿Es posible visualizar particiones del tipo \textbf{FAT} y \textbf{NTFS} en \textit{GNU/Linux}?
   \part ¿Cuál es la estructura básica de los File System en \textit{GNU/Linux}? Mencione los
-  directorios más importantes e indique que tipo de información se encuentra en ellos.
+  directorios más importantes e indique qué tipo de información se encuentra en ellos.
   ¿A qué hace referencia la sigla \textbf{FHS}?
 \end{parts}
 
 \question Particiones:
 \begin{parts}
   \part Definición. Tipos de particiones. Ventajas y Desventajas.
-  \part ¿Como se identifican las particiones en \textit{GNU/Linux}? (Considere discos \textbf{IDE}, \textbf{SCSI} y
+  \part ¿Cómo se identifican las particiones en \textit{GNU/Linux}? (Considere discos \textbf{IDE}, \textbf{SCSI} y
   \textbf{SATA}).
-  \part ¿Cuantas particiones son necesarias como mínimo para instalar \textit{GNU/Linux}?
+  \part ¿Cuántas particiones son necesarias como mínimo para instalar \textit{GNU/Linux}?
   Nómbrelas indicando tipo de partición, identificación, tipo de File System y punto de
   montaje.
   \part Ejemplifique diversos casos de particionamiento dependiendo del tipo de tarea que
@@ -102,34 +101,41 @@
   ¿Qué diferencia nota?
 \end{parts}
 
-\question Comandos en \textit{GNU/Linux} (Investigue su funcionamiento y parámetros más importantes):
+\question Indique qué comando es necesario utilizar para realizar cada una de las siguientes acciones. Investigue su funcionamiento y parámetros más importantes:
 \begin{parts}
-  \part cd
-  \part ls
-  \part pwd
-  \part df
+  \part Cree la carpeta ISO2017
+  \part Acceda a la carpeta (cd)
+  \part Cree dos archivos con los nombres iso2017-1 e iso2017-2  (touch)
+  \part Liste el contenido del directorio actual (ls)
+  \part Visualizar la ruta donde estoy situado  (pwd)   
+  \part Busque todos los archivos en los que su nombre contiene la cadena “iso*” (find)
+  \part Informar la cantidad de espacio libre en disco  (df)
+  \part Verifique los usuarios conectado al sistema (who)
+  \part Acceder a el archivo iso2017-1 e ingresar Nombre y Apellido
+  \part Mostrar en pantalla las últimas líneas de un archivo (tail). 
+\end{parts}
+
+\question Investigue su funcionamiento y parámetros más importantes:
+\begin{parts}
   \part shutdown
-  \part reboot
-  \part halt
-  \part find
-  \part locate
-  \part uname
-  \part gmesg
-  \part who
+  \part reboot 
+  \part halt    
+  \part locate                                                 
+  \part uname   
+  \part gmesg                                               
   \part lspci
   \part at
-  \part touch
-  \part netstat
-  \part tail
-  \part head
-  \part mount
+  \part netstat 
+  \part mount  
   \part umount
-  \part losetup
-  \part write
-  \part mkfs
+  \part head 
+  \part losetup                                               
+  \part write   
+  \part mkfs                                                 
   \part fdisk (con cuidado)
 \end{parts}
 
-\question Indique en que directorios se almacenan los comandos mencionados en el ejercicio anterior.
-
+\question Investigue su funcionamiento y parámetros más importantes:
+\begin{parts}
+    \part Indique en qué directorios se almacenan los comandos mencionados en el ejercicio anterior.
 \end{questions}
