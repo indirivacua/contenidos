@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+before_install:
+  - sudo apt-get -qq update && sudo apt-get install -y texlive texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-lang-spanish build-essential
+script:
+  - make
+#deploy:
+#  provider: releases
+#  api_key:
+#    secure: [YOUR KEY]
+#  file:
+#    - _build/your_file_1.pdf
+#  skip_cleanup: true
+#  on:
+#    tags: true
+
