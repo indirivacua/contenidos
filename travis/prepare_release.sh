@@ -4,6 +4,8 @@
 
 set -eo pipefail
 
+echo "Preparando archivos PDF generados para publicarlos como una nueva release"
+
 DEST="_dist"
 
 mkdir -p "${DEST}"
@@ -16,6 +18,7 @@ for subject in iso so; do
       group="${group%%/*}"
       target="${subject}_${group}_$(basename "${file}")"
       cp "${file}" "${DEST}/${target}"
+      echo "- Copiado '${file}' a '${DEST}/${target}'"
     done
   done
 done
