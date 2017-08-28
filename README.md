@@ -89,16 +89,16 @@ nueva _release_ del repositorio. Para una mejor organización de los materiales 
 futuro, se recomienda seguir la siguiente estructura en los nombres de los tags:
 
 ```
-YYYY-mm-vv
+YYYY-mm-vvv
 ```
 
 Donde:
 
 * `YYYY` es el número de año expresado con cuatro dígitos (por ejemplo: `2017`).
 * `mm` es el número de mes expresado con dos dígitos (por ejemplo: `08`).
-* `vv` es un número de versión incremental por mes expresado con dos dígitos, es
-  decir que con cada cambio de año/mes se vuelve a iniciar desde la versión 0
-  (por ejemplo: `00`).
+* `vvv` es un número de versión incremental por mes expresado con tres dígitos,
+  es decir que con cada cambio de año/mes se vuelve a iniciar desde la versión 0
+  (por ejemplo: `000`).
 
 De esta forma, tendremos una organización cronológica de los cambios que se
 realicen, y podremos saber fácilmente qué versión es la última para un año y/o
