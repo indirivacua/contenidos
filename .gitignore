@@ -18,3 +18,4 @@
 pdf/
 *.fuse*
 /.vagrant
+/_dist

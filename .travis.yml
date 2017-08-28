@@ -12,8 +12,11 @@ deploy:
   provider: releases
   api_key:
     secure: GBKwal1uUx8BF+IQuBN0Dut9mBfR0nKN36Kr4l4NiJr0JunGaFWXiX+jtc+HwGVRQ4sF2Yj37VccbDEkTEbFiIfLNvr6gb1q1kpCFSrw9oSq4K7vVdEfNQXzTL9zouFyjh6zaA3XyvK1GSfSEeLbX3hOBqJSlk+SFhJMd563lGoxdvuoHpWYUysvk3di4KfiNsvJcNRh5rry+fOMHZ6bronRIYY1M5tbe8UnCzlR33WGONKmzdUYJ8IM6n7Hte61KOhqx5Fl0CHxBI63y0rvRTtF6oGAlk0pyTB2+ZvS3I84Tzt1XHaJ0SN4O+fJMVUVPrGY4WU+41hWLgZXUNvvvGAgeNJKCJY0P6KAcJLtPmFDXKl/RtEyQLAQENl6bwBvWOY+HhQ4HY52YkvH9lIvg5IlzFRONpSvMKiD6qaFOhalGVR26snH+8jucxS3EG41Qx9e4D8pn55a764XO1+i/WRiP8ZEw6tCtHEvYkDN0HzQeEfmi7Ka32Vz336RrpS9EsQ+drStTUTrTu+f9ntTIHf0jVZgaTh/DcBkYW13EpQJjFPVc+cuIA6TlfGCxkUorWUqsxzjxzbTJHTKeR8/075Ovpad8hwo9JvFG8erDxmHgsHtphMGGuF0O36LHytBUogWWsO2aYuv4+tvlVF+nxnRlDnyBx5VNYzMdUxXxSA=
+  before_deploy:
+    - travis/prepare_release.sh
   file_glob: true
-  file: pdf/**/*.pdf
+  file:
+    - dist/*.pdf
   skip_cleanup: true
   on:
     repo: unlp-so/contenidos
