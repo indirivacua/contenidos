@@ -74,3 +74,32 @@ directorio `pdf/`. ¡No hagas `commit`s de PDFs sin terminar!
 La mejor forma de escribir material para la cátedra utilizando este
 repositorio es mirando y estudiando lo que ya está hecho, con el objetivo de
 aprender la sintaxis, y traducir a LaTeX el material de años anteriores.
+
+# Publicación de los materiales
+
+Este repositorio utiliza [Travis CI](https://travis-ci.org) como herramienta de
+integración contínua. Esto nos permite no sólo asegurarnos que los cambios que
+realizamos a los fuentes LaTeX no generan errores, sino que además nos permite
+generar automáticamente los entregables en formato PDF y publicarlos dentro de
+las _releases_ de GitHub.
+
+Para publicar una nueva versión del material, basta con crear un tag de git, y
+Travis CI se encargará de generar los PDF por nosotros y publicarlos como una
+nueva _release_ del repositorio. Para una mejor organización de los materiales a
+futuro, se recomienda seguir la siguiente estructura en los nombres de los tags:
+
+```
+YYYY-mm-vvv
+```
+
+Donde:
+
+* `YYYY` es el número de año expresado con cuatro dígitos (por ejemplo: `2017`).
+* `mm` es el número de mes expresado con dos dígitos (por ejemplo: `08`).
+* `vvv` es un número de versión incremental por mes expresado con tres dígitos,
+  es decir que con cada cambio de año/mes se vuelve a iniciar desde la versión 0
+  (por ejemplo: `000`).
+
+De esta forma, tendremos una organización cronológica de los cambios que se
+realicen, y podremos saber fácilmente qué versión es la última para un año y/o
+semestre particular, si así lo requiriésemos.
