@@ -2,26 +2,26 @@
 
 \question Editor de textos:
 \begin{parts}
-	\part Nombre al menos 3 editores de texto que puede utilizar desde linea de comandos.
-	\part ¿En que se diferencia un editor de texto a los comandos cat, more o less? Enumere los modos de operación que posee el editor de textos vi.
- 	\part Nombre los comandos mas comunes que se le pueden enviar al editor de textos vi.
+	\part Nombre al menos 3 editores de texto que puede utilizar desde la línea de comandos.
+	\part ¿En qué se diferencia un editor de texto de los comandos cat, more o less? Enumere los modos de operación que posee el editor de textos vi.
+ 	\part Nombre los comandos más comunes que se le pueden enviar al editor de textos vi.
 \end{parts}
 
 \question Proceso de Arranque \textit{SystemV}:
 \begin{parts}
 	\part Enumere los pasos del proceso de inicio de un sistema GNU/Linux, desde que se prende la PC hasta que se logra obtener el login en el sistema.
  	\part Proceso \textbf{INIT}. ¿Quién lo ejecuta? ¿Cuál es su objetivo?
- 	\part Ejecute el comando pstree. ¿Que es lo que se puede observar a partir de la ejecución de este comando?.
+ 	\part Ejecute el comando pstree. ¿Qué es lo que se puede observar a partir de la ejecución de este comando?
  	\part RunLevels. ¿Qué son? ¿Cuál es su objetivo?
- 	\part ¿A qué hace referencia cada nivel de ejecución según el estándar? ¿Dónde se define que Runlevel ejecutar al iniciar el sistema operativo? ¿todas las distribuciones respetan estos estándares?
-	\part Archivo /etc/inittab. ¿Cuál es su finalidad? ¿Qué tipo de información se almacena en el? ¿Cuál es la estructura de la información que en el se almacena?
+ 	\part ¿A qué hace referencia cada nivel de ejecución según el estándar? ¿Dónde se define qué Runlevel ejecutar al iniciar el sistema operativo? ¿Todas las distribuciones respetan estos estándares?
+	\part Archivo /etc/inittab. ¿Cuál es su finalidad? ¿Qué tipo de información se almacena en el? ¿Cuál es la estructura de la información que en él se almacena?
  	\part	Suponga que se encuentra en el runlevel <X>. Indique qué comando(s) ejecutaría para cambiar al runlevel <Y>. ¿Este cambio es permanente? ¿Por qué?
- 	\part Scripts RC. ¿Cuál es su finalidad? ¿Dónde se almacenan? Cuando un sistema GNU/Linux arranca o se detiene se ejecutan scripts, indique como determina que script ejecutar ante cada acción. ¿Existe un orden para llamarlos? Justifique.
+ 	\part Scripts RC. ¿Cuál es su finalidad? ¿Dónde se almacenan? Cuando un sistema GNU/Linux arranca o se detiene se ejecutan scripts, indique cómo determina qué script ejecutar ante cada acción. ¿Existe un orden para llamarlos? Justifique.
  	\part ¿Qué es insserv? ¿Para qué se utiliza? ¿Qué ventajas provee respecto de un arranque tradicional?
  	\part ¿Cómo maneja Upstart el proceso de arranque del sistema?
  	\part Cite las principales diferencias entre SystemV y Upstart.
-	\part Que reemplaza a los script \textit{rc} de \textit{SystemV} en \textit{Upstart}? En que ubicación se encuentran?
-	\part Dado el siguiente \textit{job} de upstart perteneciente al servicio de base de datos del mysql indique a que hace referencia cada linea del mismo:
+	\part Qué reemplaza a los scripts \textit{rc} de \textit{SystemV} en \textit{Upstart}? ¿En que ubicación del filesystem se encuentran?
+	\part Dado el siguiente \textit{job} de upstart perteneciente al servicio de base de datos del mysql indique a qué hace referencia cada línea del mismo:
 	\begin{lstlisting}
 # MySQL Service
 description "MySQL Server"
@@ -36,17 +36,17 @@ exec /usr/sbin/mysqld
 [...]
 	\end{lstlisting}
 
-	\part ¿Que es \textit{sytemd}?
-	\part ¿A que hace referencia el concepto de activación de socket en \text{systemd}?
-	\part ¿A que hace referencia el concepto de \textit{cgroup}?
+	\part ¿Qué es \textit{sytemd}?
+	\part ¿A qué hace referencia el concepto de activación de socket en \text{systemd}?
+	\part ¿A qué hace referencia el concepto de \textit{cgroup}?
 \end{parts}
 
 \question Usuarios:
 \begin{parts}
 	\part ¿Qué archivos son utilizados en un sistema GNU/Linux para guardar la información de los usuarios?
-	\part ¿A que hacen referencia las siglas \textit{UID} y \textit{GID}? ¿Pueden coexistir UIDs iguales en un sistema GNU/Linux? Justifique.
+	\part ¿A qué hacen referencia las siglas \textit{UID} y \textit{GID}? ¿Pueden coexistir UIDs iguales en un sistema GNU/Linux? Justifique.
 	\part ¿Qué es el usuario root? ¿Puede existir más de un usuario con este perfil en GNU/Linux? ¿Cuál es la \textit{UID} del \textit{root}?.
-	\part Agregue un nuevo usuario llamado iso2015 a su instalación de GNU/Linux, especifique que su home sea creada en /home/iso\_2015, y hágalo miembro del grupo cátedra (si no existe, deberá crearlo). Luego, sin iniciar sesión como este usuario cree un archivo en su home personal que le pertenezca. Luego de todo esto, borre el usuario y verifique que no queden registros de él en los archivos de información de los usuarios y grupos.
+	\part Agregue un nuevo usuario llamado iso2017 a su instalación de GNU/Linux, especifique que su home sea creada en /home/iso\_2017, y hágalo miembro del grupo catedra (si no existe, deberá crearlo). Luego, sin iniciar sesión como este usuario cree un archivo en su home personal que le pertenezca. Luego de todo esto, borre el usuario y verifique que no queden registros de él en los archivos de información de los usuarios y grupos.
 	\part Investigue la funcionalidad y parámetros de los siguientes comandos:
 	\begin{itemize}
 		\item useradd ó adduser
@@ -92,14 +92,14 @@ exec /usr/sbin/mysqld
 
 \question Procesos:
 \begin{parts}
-	\part ¿Qué es un proceso? ¿A que hacen referencia las siglas \textit{PID} y \textit{PPID}? ¿Todos los procesos tienen estos atributos en GNU/Linux? Justifique. Indique que otros atributos tiene un proceso.
-	\part Indique que comandos se podrían utilizar para ver que procesos están en ejecución en un sistema GNU/Linux.
-	\part ¿Qué significa que un proceso se esta ejecutando en Background? ¿Y en Foreground?
+	\part ¿Qué es un proceso? ¿A que hacen referencia las siglas \textit{PID} y \textit{PPID}? ¿Todos los procesos tienen estos atributos en GNU/Linux? Justifique. Indique qué otros atributos tiene un proceso.
+	\part Indique qué comandos se podrían utilizar para ver qué procesos están en ejecución en un sistema GNU/Linux.
+	\part ¿Qué significa que un proceso se está ejecutando en Background? ¿Y en Foreground?
 	\part ¿Cómo puedo hacer para ejecutar un proceso en Background? ¿Como puedo hacer para pasar un proceso de background a foreground y viceversa?
-	\part Pipe ( \textbf{|} ). ¿Cual es su finalidad? Cite ejemplos de su utilización.
+	\part Pipe ( \textbf{|} ). ¿Cuál es su finalidad? Cite ejemplos de su utilización.
 	\part Redirección. ¿Qué tipo de redirecciones existen? ¿Cuál es su finalidad? Cite ejemplos de utilización.
 	\part Comando \textit{kill}. ¿Cuál es su funcionalidad? Cite ejemplos.
-	\part Investigue la funcionalidad y parámetros de los siguientes comandos relacionados con el manejo de procesos en GNU/Linux. Además
+	\part Investigue la funcionalidad y parámetros de los siguientes comandos relacionados con el manejo de procesos en GNU/Linux. Además,
 	compárelos entre ellos:
 	\begin{itemize}
 		\item ps
@@ -113,8 +113,8 @@ exec /usr/sbin/mysqld
 
 \question Otros comandos de Linux (Indique funcionalidad y parámetros):
 \begin{parts}
-	\part ¿A qué hace referencia el concepto de empaquetar archivos en GNU/linux?
-	\part Seleccione 4 archivos dentro de algún directorio al que tenga persmiso y sume el tamaño de cada uno de estor archivos. Cree un archivo empaquetado conteniendo estos 4 archivos y compare los tamaños de los mismos. ¿Qué característica nota?
+	\part ¿A qué hace referencia el concepto de empaquetar archivos en GNU/Linux?
+	\part Seleccione 4 archivos dentro de algún directorio al que tenga permiso y sume el tamaño de cada uno de estos archivos. Cree un archivo empaquetado conteniendo estos 4 archivos y compare los tamaños de los mismos. ¿Qué característica nota?
 	\part ¿Qué acciones debe llevar a cabo para comprimir 4 archivos en uno solo? Indique la secuencia de comandos ejecutados.
 	\part ¿Pueden comprimirse un conjunto de archivos utilizando un único comando?
 	\part Investigue la funcionalidad de los siguientes comandos:
@@ -127,7 +127,7 @@ exec /usr/sbin/mysqld
 	\end{itemize}
 \end{parts}
 
-\question Indique que acción realiza cada uno de los comandos indicados a continuación considerando su orden. Suponga que se ejecutan desde un usuario que no es root ni pertenece al grupo de root. (Asuma que se encuentra posicionado en el directorio de trabajo del usuario con el que se logueo). En caso de no poder ejecutarse el comando indique la razón:
+\question Indique qué acción realiza cada uno de los comandos indicados a continuación considerando su orden. Suponga que se ejecutan desde un usuario que no es root ni pertenece al grupo de root. (Asuma que se encuentra posicionado en el directorio de trabajo del usuario con el que se logueó). En caso de no poder ejecutarse el comando, indique la razón:
 \begin{lstlisting}
 		ls -l > prueba
 		ps > PRUEBA
@@ -147,7 +147,7 @@ exec /usr/sbin/mysqld
 		shutdown
 \end{lstlisting}
 
-\question Indique que comando seria necesario ejecutar para realizar cada una de las siguientes acciones:
+\question Indique qué comando sería necesario ejecutar para realizar cada una de las siguientes acciones:
 \begin{parts}
 	\part Terminar el proceso con \textit{PID} 23.
 	\part Terminar el proceso llamado \textit{init}. ¿Qué resultados obtuvo?
@@ -170,24 +170,24 @@ exec /usr/sbin/mysqld
 	\part Guardar en el archivo \textbf{/home/<su nombre de usuario>/donde} el directorio donde me encuentro en este momento, en caso de que el archivo exista no se debe eliminar su contenido anterior.
 \end{parts}
 
-\question Indique que comando seria necesario ejecutar para realizar cada una de las siguientes acciones:
+\question Indique qué comando sería necesario ejecutar para realizar cada una de las siguientes acciones:
 \begin{parts}
 	\part Ingrese al sistema como usuario “root”
-	\part Cree un usuario. Elija para como nombre, por convención, la primer letra de su nombre seguida de su apellido. Asígnele una contraseña de acceso.
+	\part Cree un usuario. Elija como nombre, por convención, la primer letra de su nombre seguida de su apellido. Asígnele una contraseña de acceso.
  	\part ¿Qué archivos fueron modificados luego de crear el usuario y qué directorios se crearon?
-	\part Crear un directorio en /tmp llamado cursada2010
+	\part Crear un directorio en /tmp llamado cursada2017
 	\part Copiar todos los archivos de /var/log al directorio antes creado.
 	\part Para el directorio antes creado (y los archivos y subdirectorios contenidos en él) cambiar el propietario y grupo al usuario creado y grupo users.
 	\part Agregue permiso total al dueño, de escritura al grupo y escritura y ejecución a todos los demás usuarios para todos los archivos dentro de un directorio en forma recursiva.
 	\part Acceda a otra terminal virtual para loguearse con el usuario antes creado.
-	\part Una vez logueado con el usuario antes creado, averigüe cual es el nombre de su terminal.
+	\part Una vez logueado con el usuario antes creado, averigüe cuál es el nombre de su terminal.
 	\part Verifique la cantidad de procesos activos que hay en el sistema.
 	\part Verifiqué la cantidad de usuarios conectados al sistema.
 	\part Vuelva a la terminal del usuario root, y envíele un mensaje al usuario anteriormente creado, avisándole que el sistema va a ser apagado.
 	\part Apague el sistema.
 \end{parts}
 
-\question Indique que comando seria necesario ejecutar para realizar cada una de las siguientes acciones:
+\question Indique qué comando sería necesario ejecutar para realizar cada una de las siguientes acciones:
 \begin{parts}
 	\part Cree un directorio cuyo nombre sea su número de legajo e ingrese a él.
 	\part Cree un archivo utilizando el editor de textos vi, e introduzca su información personal: Nombre, Apellido, Número de alumno y dirección de correo electrónico. El archivo debe llamarse "LEAME".
@@ -198,11 +198,11 @@ exec /usr/sbin/mysqld
 		\item Otros: todos los permisos
 	\end{itemize}
 	\part Vaya al directorio /etc y verifique su contenido. Cree un archivo dentro de su directorio personal cuyo nombre sea leame donde el contenido del mismo sea el listado de todos los archivos y directorios contenidos en /etc. ¿Cuál es la razón por la cuál puede crear este archivo si ya existe un archivo llamado "LEAME" en este directorio?.
-	\part ¿Qué comando utilizaría y de qué manera si tuviera que localizar un archivo dentro del file system? ¿Y si tuviera que localizar varios archivos con características similares? Explique el concepto teórico y ejemplifique.
+	\part ¿Qué comando utilizaría y de qué manera si tuviera que localizar un archivo dentro del filesystem? ¿Y si tuviera que localizar varios archivos con características similares? Explique el concepto teórico y ejemplifique.
 	\part Utilizando los conceptos aprendidos en el punto e), busque todos los archivos cuya extensión sea .so y almacene el resultado de esta búsqueda en un archivo dentro del directorio creado en a). El archivo deberá llamarse "ejercicio\_f".
 \end{parts}
 
-\question Indique que acción realiza cada uno de los comandos indicados a continuación considerando su orden. Suponga que se ejecutan desde un usuario que no es root ni pertenece al grupo de root. (Asuma que se encuentra posicionado en el directorio de trabajo del usuario con el que se logueó). En caso de no poder ejecutarse el comando indique la razón:
+\question Indique qué acción realiza cada uno de los comandos indicados a continuación considerando su orden. Suponga que se ejecutan desde un usuario que no es root ni pertenece al grupo de root. (Asuma que se encuentra posicionado en el directorio de trabajo del usuario con el que se logueó). En caso de no poder ejecutarse el comando indique la razón:
 \begin{lstlisting}
 	mkdir iso
 	cd ./iso; ps > f0
@@ -264,7 +264,7 @@ exec /usr/sbin/mysqld
 	\end{itemize}
 \end{itemize}
 
-\question Indique que comando/s es necesario para realizar cada una de las acciones de la siguiente secuencia de pasos (considerando su orden de aparición):
+\question Indique qué comando/s es necesario para realizar cada una de las acciones de la siguiente secuencia de pasos (considerando su orden de aparición):
 \begin{parts}
 	\part Cree un directorio llamado logs en el directorio /tmp.
 	\part Copie todo el contenido del directorio /var/log en el directorio creado en el punto anterior.
