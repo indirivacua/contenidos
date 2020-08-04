@@ -19,21 +19,22 @@ Serán de interés para esta práctica los siguientes tipos declarados en\\
 \end{description}
 
 Investigar estos tipos de datos mencionados, la estructura \textit{init\_net} y
-las macros \texttt{first\_net\_device} y \texttt{next\_net\_device}. Estos
-serán necesarios para obtener la información pedida por el enunciado.
+las macros\\
+\texttt{first\_net\_device} y \texttt{next\_net\_device}. Estos serán
+necesarios para obtener la información pedida por el enunciado.
 
 Considerar que el kernel cuenta con sus propias implementaciones de
 \texttt{strcmp} y \texttt{strncmp} que pueden resultar útiles a la hora de
 identificar \textit{eth0}.
 
 Se recomienda que la system call a implementar reciba como argumento un puntero
-a una estructura de tipo \verb+“struct net_device_stats”+ donde se cargarán los
+a una estructura de tipo \verb+struct net_device_stats+ donde se cargarán los
 datos de la interfaz en caso de éxito.
 
-Nota 1: Al declarar el prototipo de la system call en syscalls.h será necesario
-incluir “linux/netdevice.h”.
+\textbf{Nota 1:} Al declarar el prototipo de la system call en syscalls.h será
+necesario incluir \texttt{linux/netdevice.h}.
 
-Nota 2: Usar un sistema de la misma
+\textbf{Nota 2:} Usar un sistema de la misma
 arquitectura que el kernel (todo de 32 bits o todo de 64 bits). De otra manera
 se complejiza la copia de las estructuras de datos desde el kernel hacia el
 espacio de usuario y la declaración de la system call.

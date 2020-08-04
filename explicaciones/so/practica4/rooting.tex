@@ -45,7 +45,10 @@ fastboot flash boot out/target/product/hikey/boot.img
       
       \item Permite desbloquear el bootloader (solo si el dispositivo lo soporta).
     \begin{lstlisting}
-fastboot oem unlock
+fastboot oem get_unlock_data
+    \end{lstlisting}
+    \begin{lstlisting}
+fastboot oem unlock [ unlock code ]
     \end{lstlisting}
 
   \end{itemize}
@@ -56,9 +59,7 @@ fastboot oem unlock
   \begin{itemize}
       \item Open bootloader $\rightarrow$ las compañias no lo desean.
       
-      \item Locked bootloader $\rightarrow$ \textit{Carrier ID}.
-      
-      \item Conditionally open bootloader $\rightarrow$ pérdida de garantía.      
+      \item Locked bootloader \textit{Carrier ID} $\rightarrow$ pérdida de garantía y reseteo de fábrica.
   \end{itemize}
 \end{frame}
 
@@ -67,11 +68,11 @@ fastboot oem unlock
   \frametitle{Boot.img \& initramfs - Boot.img}
   \begin{itemize}
       \item Obtención:
-      \begin{itemize}      
-	  \item Extracción de una imagen original.
-	  
-	  \item Descarga desde un sitio confiable (CyanogenMod/MIUI).
-      \end{itemize}      
+      \begin{itemize}
+	  \item Extracción de una imagen original $\rightarrow$ de un dispositivo o del SDK de Android.
+
+	  \item Descarga desde un sitio confiable (\href{http://en.miui.com/}{MIUI}/\href{https://lineageos.org/}{LineageOS}) $\rightarrow$ \textit{zip}.
+      \end{itemize}
       
       \item División:
       \begin{itemize}
@@ -88,22 +89,22 @@ fastboot oem unlock
 \begin{frame}[fragile]
   \frametitle{Boot.img \& initramfs - Initramfs}
   \begin{itemize}
-      \item Desempaquetado y descompreción de initramfs:
-      \begin{itemize}
-	  \item Archivo empaquetado con \textbf{cpio} y comprimido con \textbf{gzip}.
-	  
-	  \item Archivo \textit{default.prop} $\rightarrow$ contiene propiedades de configuración para la inicialización del sistema.
-      \end{itemize}
+      \item Desempaquetado y descompreción de initramfs (\textit{cpio} + \textit{gzip}):
 
-      \item Habilitar modo inseguro:
-      \begin{itemize}
-	  \item Propiedad \textit{ro.secure} debe estar en falso $\rightarrow$ demonio de adb (\textit{adbd}) con permisos de \textit{root}.
-      \end{itemize}
+      \begin{lstlisting}
+gunzip -c ../your-ramdisk-file | cpio -i
+      \end{lstlisting}
+
+      \item Archivo \textit{default.prop} $\rightarrow$ contiene propiedades de configuración para la inicialización del sistema.
+
+      \item Habilitar modo inseguro: propiedad \textit{ro.secure} debe estar en falso $\rightarrow$ demonio de adb (\textit{adbd}) con permisos de \textit{root}.
       
       \item Empaquetar y comprimir initramfs inseguro:
-      \begin{itemize}
-	  \item A través de \textbf{cpio} y \textbf{gzip} respectivamente.
-      \end{itemize}
+
+      \begin{lstlisting}
+find . | cpio -o -H newc | gzip > ../newramdisk.cpio.gz
+      \end{lstlisting}
+
   \end{itemize}
 \end{frame}
 

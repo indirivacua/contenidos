@@ -47,7 +47,7 @@
     
     \item Nombre de dulces.
     
-    \item v3.0 (Honeycomb), v4.4 (KitKat), v5.1 (Lollipop), v6.0 (Marshmallow), v7.0 (Nougat), v8.0 (Oreo).
+    \item v4.4 (KitKat), v5.1 (Lollipop), v6.0 (Marshmallow), v7.0 (Nougat), v8.0 (Oreo), v9.0 (P próximamente).
   \end{itemize}
 \end{frame}
 
@@ -61,9 +61,9 @@
 
 \subsection{Procesos e Hilos}
 \begin{frame}
-  \frametitle{Procesos e Hilos - Componentes \href{https://developer.android.com/guide/components/index.html}{[ref]}}
+  \frametitle{Procesos e Hilos - Componentes \href{https://developer.android.com/guide/components/processes-and-threads}{[ref]}}
   \begin{itemize}
-    \item Componentes: \textit{activity}, \textit{service}, etc.
+    \item Componentes: \textit{activity}, \textit{service}, \textit{rceiver}, \textit{provider}.
 
     \item Cuando se invoca el primer componente de una aplicación se crea un proceso Linux con un único thread (\textit{main}/\textit{UI} thread).
     
@@ -78,7 +78,7 @@
 \begin{frame}
   \frametitle{Procesos e Hilos - Clasificación}
   \begin{itemize}
-    \item Android elimina procesos bajo demanda ante la ausencia de memoria $\rightarrow$ no cuenta con área de intercambio.
+    \item Android elimina procesos bajo demanda ante la ausencia de memoria $\rightarrow$ no cuenta con área de intercambio \footnote{https://zerocredibility.wordpress.com/2009/08/24/why-android-swap-doesnt-make-sense/}.
     
     \item Decición en base a jerarquía de procesos clasificados en:
     \begin{itemize}
@@ -129,7 +129,7 @@
         \hline
         Diseñada para ejecutar sobre poca memoria & Consume más memoria \\
         \hline
-        Ejecuta sus propios bytes codes (\textit{.dex}) $\rightarrow$ contiene multiples \textit{.class} & Ejecuta bytes codes Java (\textit{.class}) \\
+        Ejecuta sus propios bytes codes (\textit{.dex}) \footnote{https://source.android.com/devices/tech/dalvik/dex-format} & Ejecuta bytes codes Java (\textit{.class}) \\
         \hline 
         Uni-plataforma $\rightarrow$ Android & Multi-plataforma \\
         \hline
@@ -141,7 +141,7 @@
 
   Mejoras de \textit{ART} \href{https://source.android.com/devices/tech/dalvik/}{[ref]}:
   \begin{itemize}
-      \item Incorporación de compilación \textit{Ahead-of-time} (AOT) además de la compilación \textit{just-in-time} (JIT) existente.
+      \item Incorporación de compilación \textit{Ahead-of-time} (AOT) utilizando \textbf{dex2oat} además de la compilación \textit{just-in-time} (JIT) existente.
       
       \item Optimización del garbage collection (GC).
   \end{itemize}
@@ -150,7 +150,7 @@
 
 \subsection{Aplicaciones}
 \begin{frame}
-  \frametitle{Aplicaciones - Building}
+  \frametitle{Aplicaciones - Building \href{https://developer.android.com/studio/build/}{[ref]}}
   \begin{itemize}
     \item Un \textit{android package} contiene todo lo necesario para ejecutar la aplicación en un dispositivo.
     
@@ -209,8 +209,8 @@
     \item Las aplicaciones que comparten el \textit{userId} tienen que compartir la firma. Es decir que deben ser firmados por la misma clave privada.
 
     \begin{lstlisting}
-# ls -l data/data/ | grep brow                              
-# drwxr-x--x u0_a14 u0_a14 2016-05-01 17:55 com.android.browse    
+# ls -l data/data/ | grep brow
+# drwxr-x--x u0_a14 u0_a14 2016-05-01 17:55 com.android.browse
     \end{lstlisting}
   \end{itemize}
 \end{frame}
@@ -258,7 +258,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Seguridad - Signing}
+  \frametitle{Seguridad - Signing \href{https://developer.android.com/studio/publish/app-signing}{[ref]}}
   \begin{itemize}
     \item Todas las aplicaciones (\textit{.apk}) tienen que ser firmados digitalmente.
 
@@ -280,18 +280,32 @@
    
    \item A nivel de file system $\rightarrow$ particiones \textit{read-only} (/system).
    
-   \item A nivel de \textit{Linux} (\textit{RPC}) y la \textit{DVM} (aislamiento de aplicaciones).
+   \item A nivel de \textit{Linux} y \textit{ART} (aislamiento de aplicaciones).
   \end{itemize}
 \end{frame}
 
 \subsection{Almacenamiento}
 \begin{frame}
-  \frametitle{Almacenamiento}
+  \frametitle{Almacenamiento \href{https://developer.android.com/guide/topics/data/data-storage}{[ref]}}
   \begin{itemize}
+      \item Almacenamiento interno
+      \begin{itemize}    
+          \item \textit{MODE\_PRIVATE}, \textit{MODE\_WORLD\_READABLE} o \textit{MODE\_WORLD\_WRITEABLE} $\rightarrow$ desde v7.0 \textit{FileProvider}.
+      \end{itemize}
+
+      \item Shared preferences \href{https://developer.android.com/guide/topics/data/data-storage.html}{[ref]}
+      \begin{itemize}
+    \item Se puede manejar una colección de ellas.
+    
+    \item Se almacenan a través de archivos XML.
+        
+    \item Aplican como almacenamiento interno.
+    
+    \item \textit{/data/data/$<$package\_name$>$/shared\_prefs/}
+      \end{itemize}
+    \item Almacenamiento externo $\rightarrow$ READ\_EXTERNAL\_STORAGE y WRITE\_EXTERNAL\_STORAGE
       \item SQLite: 
       \begin{itemize}
-    \item Se maneja a través de una biblioteca.
-    
     \item Bajo licencia \textit{GPL}.
     
     \item Actúa sobre archivos ordinarios.
@@ -299,19 +313,6 @@
     \item Cumple las propiedades ACID.
     
     \item \textit{/data/data/$<$package\_name$>$/databases/}
-      \end{itemize}
-      
-      \item Shared preferences \href{https://developer.android.com/guide/topics/data/data-storage.html}{[ref]}
-      \begin{itemize}
-    \item Se puede manejar una colección de ellas.
-    
-    \item Se almacenan a través de archivos XML.
-    
-    \item Se identifican a través del nombre que se le da al archivo.
-    
-    \item Pueden ser privadas (\textit{MODE\_PRIVATE}) o compartidas (\textit{MODE\_WORLD\_READABLE} o \textit{MODE\_WORLD\_WRITEABLE}). Desde v7.0 $\rightarrow$ \textit{FileProvider}.
-    
-    \item \textit{/data/data/$<$package\_name$>$/shared\_prefs/}
       \end{itemize}
   \end{itemize}
 \end{frame}

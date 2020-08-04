@@ -5,16 +5,17 @@ Para poder realizar los ejercicios prácticos debera contar con las siguientes h
 \begin{itemize}
  \item El \textit{Java SE Development Kit}. Descarguelo desde la última versión desde \href{http://www.oracle.com/technetwork/java/javase/downloads}{esté}\footnote{http://www.oracle.com/technetwork/java/javase/downloads} link. Elija la arquitectura correspondiente y el formato que desee:
  \begin{itemize}
-      \item Instálelo. Puede guiarse con \href{https://www.java.com/en/download/help/download\_options.xml}{esté}\footnote{https://www.java.com/en/download/help/download\_options.xml} sitio.      
+      \item Instálelo. Puede guiarse con \href{https://www.java.com/en/download/help/download\_options.xml}{esté}\footnote{https://www.java.com/en/download/help/download\_options.xml} sitio.
  \end{itemize}
 
- \item El \textit{SDK} de Android. Descargue la última versión desde \href{https://developer.android.com/sdk/index.html\#Other}{esta}\footnote{https://developer.android.com/sdk/index.html\#Other} página:
+ \item El \textit{SDK} de Android. Descargue la última versión desde \href{https://developer.android.com/studio/\#downloads}{esta}\footnote{https://developer.android.com/studio/\#downloads} página:
  \begin{itemize}
-      \item Desempaquete y descomprima el archivo.
+      \item Si decide descargar \textit{Android Studio}, ya se le instalaran todas las herramientas necesarias de manera automática. Para realizar esta práctica, solo tendrá que asociar los binarios correspondientes a la variable de entorno \textit{PATH}.
+      \item De lo contrario descargue solo las herramientas de consola. Con lo cual, tendrá que desempaquetar y descomprimir los archivos correspondientes.
       
-      \item Acceda al \textit{Android SDK Manager}\footnote{Para ejecutar el comando directamente agregue la herramienta ``\textit{android}'' a la variable \textit{\$PATH}.}:
+      \item Acceda al \textit{Android SDK Manager}\footnote{Para ejecutar el comando directamente agregue la herramienta ``\textit{android}'' a la variable \textit{\$PATH}.} \footnote{Si instalo Android Studio, podrá instalar las dependencias desde una ventana gráfica.}:
       \begin{lstlisting}
-# android sdk
+# sdkmanager
       \end{lstlisting}
      
       \item Descargue e instale/actualice los siguientes paquetes:
@@ -23,7 +24,7 @@ Para poder realizar los ejercicios prácticos debera contar con las siguientes h
   \item \textit{Android SDK Platform-tools}.
   \item \textit{Android SDK Build-tools}.
   \item Android \ANDROIDVERSION(\ANDROIDVERSIONAPI) $\rightarrow$ \textit{SDK Platform}.
-  \item Android \ANDROIDVERSION(\ANDROIDVERSIONAPI) $\rightarrow$ \textit{Intel x86 Atom System Image}.
+  \item Android Emulator.
       \end{itemize}
 
       \item Para facilitar el desarrollo de los ejercicios, agregue las siguientes herramientas a la varaible de entorno \textit{PATH}:
@@ -33,10 +34,10 @@ Para poder realizar los ejercicios prácticos debera contar con las siguientes h
   \item \textit{<android-sdk-directory>/platform-tools/sqlite3}.
   \item \textit{<android-sdk-directory>/tools/android}.
   \item \textit{<android-sdk-directory>/tools/emulator-x86}\footnote{Puede encontrarse con el nombre ``emulator''.}.
-      \end{itemize}      
+      \end{itemize}
  \end{itemize}
  
- \item \textit{Gradle} permite construir un proyecto \emph{Android}. Descargue solo la versión binaria 2.3 desde \href{https://services.gradle.org/distributions/gradle-2.3-bin.zip}{esté}\footnote{https://services.gradle.org/distributions/gradle-2.3-bin.zip} link.
+ \item Si no instaló Android Studio, va a necesitar instalar \textit{Gradle} de manera manual. Descarguela desde \href{https://gradle.org/install/}{esté}\footnote{https://gradle.org/install/} link. Tenga en cuenta \href{https://developer.android.com/studio/releases/gradle-plugin}{esta tabla}\footnote{https://developer.android.com/studio/releases/gradle-plugin}.
 
  \item \textit{Linux image tools - mkbootimg} sirve para crear una imagen \textit{boot.img}. Descargue las mismas desde \href{https://github.com/unlp-so/contenidos/blob/master/practicas/so/practica4/rooting\_tools/mkbootimg}{esté}\footnote{https://github.com/unlp-so/contenidos/blob/master/practicas/so/practica4/rooting\_tools/mkbootimg} link:
  \begin{itemize}
@@ -67,18 +68,18 @@ Para poder realizar los ejercicios prácticos debera contar con las siguientes h
 
 \subsection{Puesta a punto}
 \begin{itemize}
-    \item Cree una maquina virtual ingresando la letra \textit{n} cuando se le realice la pregunta ``Do you wish to create a custom hardware profile [no]'':
+    \item Desde el IDE, cree un dispositivo virtual desde el. También podrá crearlo mediante los siguientes comandos (si aparece, ingrese la letra \textit{n} cuando se le realice la pregunta ``Do you wish to create a custom hardware profile [no]''):
     \begin{lstlisting}
-# android create avd --target 1 --name emulador-so
+# avdmanager create avd --target 1 --name emulador-so
     \end{lstlisting}
     \textbf{Nota}: podrá ver la lista de \textit{targets} ejecutando:
     \begin{lstlisting}
-# android list targets
+# android list target
     \end{lstlisting}
     
     \item Inicie el emulador (\textit{avd - android virtual device}):
     \begin{lstlisting}
-# emulador-x86 -avd emulador-so
+# emulator -avd emulador-so
     \end{lstlisting}
 
     \item Acceda a la shell del dispositivo:
@@ -96,7 +97,7 @@ Para su ayuda, ejecute:
 \end{lstlisting}
 
 \begin{itemize}
-    \item Acceda a la configuración del dispositivo:
+    \item Acceda a la configuración del dispositivo \footnote{Requiere Android Lollipop(5.0/5.1)}:
     \begin{lstlisting}
 # sqlite3 /data/data/com.android.providers.settings/databases/settings.db
     \end{lstlisting}
@@ -132,7 +133,7 @@ sqlite> select * from system;
     \end{lstlisting}
     ¿Aprecia algún otro tipo de memoria? ¿Por qué?   
     
-    \item ¿Qué tipo de file system tiene el dispositivo virtual creado? (\textbf{Tip}: utilice el comando \textit{mount})      
+    \item ¿Qué file systems existen en el dispositivo virtual creado? (\textbf{Tip}: utilice el comando \textit{mount})      
 \end{itemize}
 
 \subsection{Aplicaciones}
@@ -173,7 +174,14 @@ Para su ayuda, ejecute:
     
     \item Entendiendo el \textit{sandbox}:
     \begin{enumerate}
-    \item Cree tres proyectos\footnote{\href{http://tools.android.com/tech-docs/new-build-system/version-compatibility}{Aquí} puede ver la compatibilidad entre la versión de \textit{Gradle} y su versión del \textit{plug-in} para \textit{Android}.}:
+    \item Cree tres proyectos:
+        \begin{itemize}
+         \item nombre/dominio: unlp.so.android.uno
+         \item nombre/dominio: unlp.so.android.dos
+         \item nombre/dominio: unlp.so.android.tres
+        \end{itemize}
+    
+    A partir de las verciones más recientes del SDK de Android, los proyectos deben crearse desde el mismo IDE. Si instala un versión más antigua, podrá crear los proyectos mediante los siguientes comandos \footnote{\href{http://tools.android.com/tech-docs/new-build-system/version-compatibility}{Aquí} puede ver la compatibilidad entre la versión de \textit{Gradle} y su versión del \textit{plug-in} para \textit{Android}.}:
     \begin{lstlisting}
 # android create project --name soUno --path ./soUno 
 --activity ActividadUno --package unlp.so.android.uno 
@@ -188,7 +196,7 @@ Para su ayuda, ejecute:
 --target 1 -g -v 1.1.3
     \end{lstlisting}
     
-    \item Elimine el bloque, para ámbito de producción, del archivo \textit{build.gradle} dentro del directorio raíz de cada uno de los proyectos:
+    \item Si existe, elimine el bloque de ámbito productivo (release), del archivo \textit{build.gradle} dentro del directorio raíz de cada uno de los proyectos y/o módulos de los mismos:
     \begin{lstlisting}
 buildTypes {
   release {
@@ -200,7 +208,7 @@ buildTypes {
     
     \item Agregue, al \textit{tag manifest} del archivo \textit{AndroidManifest.xml} 
     
-    (\emph{<directorio-raíz-proyecto>/src/main/AndroidManifest.xml}), el atributo \textit{sharedUserId} con el mismo valor a las aplicaciones uno y dos:
+    (\emph{<directorio-raíz-proyecto>/app/src/main/AndroidManifest.xml}), el atributo \textit{sharedUserId} con el mismo valor a las aplicaciones uno y dos:
     \begin{lstlisting}
 android:sharedUserId="unlp.so.android.uno"
     \end{lstlisting}
@@ -215,22 +223,22 @@ android:sharedUserId="unlp.so.android.uno"
 </manifest>
     \end{lstlisting}
     
-    \item Construya las aplicaciones mediante la herramienta \textit{Gradle}, posicionandose en el directorio raíz de cada proyecto (requiere conexión a Internet):
+    \item Construya las aplicaciones mediante el IDE o bien mediante la herramienta \textit{Gradle}, posicionandose en el directorio raíz de cada proyecto (requiere conexión a Internet):
     \begin{lstlisting}
 # gradle assembleDebug
     \end{lstlisting}
-    Podrá ver los \textit{.apk} generados en \emph(<directorio-raíz-proyecto>/build/output/apk/). 
+    Podrá ver los \textit{.apk} generados en \emph(<directorio-raíz-proyecto>/app/build/outputs/apk/). 
     
-    Además podrá saber que tareas puede realizar a través de \textit{Gradle} ejecutando lo siguiente:
+    Además podrá saber que tareas ya vienen configuradas a través de \textit{Gradle} ejecutando lo siguiente:
     \begin{lstlisting}
 # gradle tasks
     \end{lstlisting}
      
-    \item Instale las aplicaciones en el dispositivo (requiere que el dispositivo este iniciado):
+    \item Instale las aplicaciones en el dispositivo (requiere que el dispositivo/emulador este conectado/iniciado):
     \begin{lstlisting}
-# adb install <directorio-apk-generados-proyecto-uno>/soUno-debug.apk
-# adb install <directorio-apk-generados-proyecto-dos>/soDos-debug.apk
-# adb install <directorio-apk-generados-proyecto-tres>/soTres-debug.apk
+# adb install <debug-apk-generado-proyecto-uno>
+# adb install <debug-apk-generado-proyecto-dos>
+# adb install <debug-apk-generado-proyecto-tres>
     \end{lstlisting}
     
     \item Ejecute cada una de las aplicaciones.
@@ -247,7 +255,7 @@ $ adb shell
         \end{lstlisting}
     \end{questions}
     
-    \item Como posiblemente ya sepa, el \textit{userId} del usuario \textit{root} en Linux es el \emph{0}. En la explicación se dijo que cada aplicación Android es un usuario Linux, es decir que tiene un \textit{userId} único. Debera acceder a un archivo en el cual, entre otras cosas se define la configuración de usuarios y grupos para el sistema operativo Android. Acceda a la siguiente \href{https://android.googlesource.com/platform/system/core.git/+/master/include/private/android\_filesystem\_config.h}{página}\footnote{https://android.googlesource.com/platform/system/core.git/+/master/include/private/android\_filesystem\_config.h} y responda:
+    \item Como posiblemente ya sepa, el \textit{userId} del usuario \textit{root} en Linux es el \emph{0}. En la explicación se dijo que cada aplicación Android es un usuario Linux, es decir que tiene un \textit{userId} único. Debera acceder a un archivo en el cual, entre otras cosas se define la configuración de usuarios y grupos para el sistema operativo Android. Acceda a la siguiente \href{https://android.googlesource.com/platform/system/core.git/+/master/libcutils/include/private/android\_filesystem\_config.h}{página}\footnote{https://android.googlesource.com/platform/system/core.git/+/master/libcutils/include/private/android\_filesystem\_config.h} y responda:
     \begin{questions}
         \question ¿Cuál es el \textit{userId} del usuario \emph{system}?
         
@@ -256,11 +264,11 @@ $ adb shell
         \question ¿Qué \textit{userId} se le asigna al demonio adb (\textit{adbd})?
     \end{questions}
     
-    \textbf{Nota}: El que desee hacerlo puede leer, no necesariamente todo, \href{http://users.encs.concordia.ca/~clark/papers/2012\_spsm.pdf}{esté}\footnote{http://users.encs.concordia.ca/~clark/papers/2012\_spsm.pdf} artículo en donde se explica intrínsecamente la asignación del \textit{userId} al momento de instalar una aplicación en Android.
+    \textbf{Nota}: El que desee hacerlo puede leer \href{http://users.encs.concordia.ca/~clark/papers/2012\_spsm.pdf}{esté}\footnote{http://users.encs.concordia.ca/~clark/papers/2012\_spsm.pdf} artículo en donde se explica intrínsecamente la asignación del \textit{userId} al momento de instalar una aplicación en Android.
     \end{enumerate}
 \end{itemize}
 
 \subsection{Rooting}
 \begin{questions}
-  \question Siguiendo la explicación práctica y \href{http://android-dls.com/wiki/index.php?title=HOWTO%3a\_Unpack,\_Edit,\_and\_Re-Pack\_Boot\_Images}{este}\footnote{http://android-dls.com/wiki/index.php?title=HOWTO\%3a\_Unpack,\_Edit,\_and\_Re-Pack\_Boot\_Images} link realice el rooteo de \href{}{esta} imagen.
+  \question Siguiendo la explicación práctica y \href{http://android-dls.com/wiki/index.php?title=HOWTO%3a\_Unpack,\_Edit,\_and\_Re-Pack\_Boot\_Images}{este}\footnote{http://android-dls.com/wiki/index.php?title=HOWTO\%3a\_Unpack,\_Edit,\_and\_Re-Pack\_Boot\_Images} o \href{http://whiteboard.ping.se/Android/Rooting}{este}\footnote{http://whiteboard.ping.se/Android/Rooting} link realice el rooteo de \href{}{esta} imagen.
 \end{questions}

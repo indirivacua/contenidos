@@ -14,7 +14,7 @@
   
   \question ¿Cuándo fue comprado por la empresa \textbf{Google}?
   
-  \question ¿Cuándo fue presentada su versión \textit{beta}?, ¿Qué es la \textbf{OHA}?
+  \question ¿Qué es la \textbf{OHA}?
   
   \question ¿En qué año se lanzo la primer versión estable?
   
@@ -38,34 +38,14 @@
   \end{parts}
 \end{questions}
 
-\subsection{Procesos}
-\begin{questions}
-  \question ¿Qué comandos de GNU/Linux tenemos disponibles en Andoid?
-  
-  \question ¿Android cuenta con un área de intercambio?, ¿Por qué?
-  
-  \question ¿Qué alternativa tiene a la hora liberar memoria?, ¿Cómo se clasifica los procesos?
-  
-  \question Lea \href{http://developer.android.com/guide/components/processes-and-threads.html}{este}\footnote{http://developer.android.com/guide/components/processes-and-threads.html} artículo y responda:
-  \begin{parts}
-    \part Por defecto, ¿en cuántos procesos/threads corren los componentes de una aplicación?
-    
-    \part ¿Los componentes de las aplicaciones pueden correr en procesos separados y/o en el mismo proceso?
-    
-    \part ¿Se pueden crear \textit{n} threads de un proceso?
-    
-    \part ¿Los componente de la vista de una aplicación son \textit{thread-safe}?, ¿Qué reglas sigue el \textit{Android's single thread model}?
-  \end{parts}
-
-  \question ¿Qué es \textit{DVM}?, ¿Por qué fue diseñada?. Compare este concepto con el de \textit{JVM}. Adicional mente compare el concepto de \textit{DVM} con el de \textit{ART} en base a \href{http://www.addictivetips.com/android/art-vs-dalvik-android-runtime-environments-explained-compared/}{este}\footnote{http://www.addictivetips.com/android/art-vs-dalvik-android-runtime-environments-explained-compared/} y \href{https://en.wikipedia.org/wiki/Android\_Runtime}{este}\footnote{https://en.wikipedia.org/wiki/Android\_Runtime} artículo.
-
-  \question ¿Qué es y de qué se encarga \textit{Zygote}?
-\end{questions}
-
 \subsection{Aplicaciones}
 \begin{questions}
+  \question ¿Qué componentes de una aplicación Android existen? ¿para que sirve cada uno?
+
   \question ¿Qué es \textit{Gradle}?, ¿Qué tarea permite realizar?
   
+  \question ¿A qué hacen referencia y para qué sirven las varibles \textit{compileSdkVersion}, \textit{minSdkVersion}, \textit{targetSdkVersion} y \textit{buildToolsVersion}? ¿tienen que tener alguna relación entre ellas?. ¿Y la variable \textit{versionCode}? ¿que impacto tiene en la distribución de una aplicación a través de Google Play Store?
+
   \question ¿Todas las aplicaciones tiene que estar firmadas digitalmente para ejecutar en un dispositivo?, ¿A través de que mecanismo se realiza la firma digital?, ¿A través de que herramienta se lo puede hacer?
   
   \question ¿Qué es el \textit{application sandbox}?
@@ -77,6 +57,36 @@
   \question ¿Dónde se define el acceso a los recursos por parte de las aplicaciones?, ¿Pueden realizarce cambios en tiempo de ejecución?, ¿Qué excepcion se lanza si una aplicación intenta acceder a un recurso sobre el cual no definio permisos?
   
   \question ¿En que momento el usuario le da permiso a la aplicación para que esta utilice los recursos del dispositivo? ¿Se pueden definir de manera dinámica?
+
+  \question ¿Qué es un y qué contiene un APK?
+
+  \question ¿Para qué sirve el archivo AndroidManifest.xml?. ¿Qué son los archivos \textit{.dex}?
+
+  \question Detalle el proceso de firma (signing) de un APK.
+\end{questions}
+
+\subsection{Procesos}
+\begin{questions}
+  \question ¿Qué comandos de GNU/Linux tenemos disponibles en Andoid?
+  
+  \question ¿Android cuenta con un área de intercambio?, ¿por qué?
+  
+  \question ¿Qué alternativa tiene a la hora liberar memoria?, ¿Cómo se clasifica los procesos?
+  
+  \question Lea \href{http://developer.android.com/guide/components/processes-and-threads.html}{este}\footnote{http://developer.android.com/guide/components/processes-and-threads.html} artículo y responda:
+  \begin{parts}
+    \part Por defecto, ¿en cuántos procesos/threads corren los componentes de una aplicación?
+    
+    \part ¿Los componentes de las aplicaciones pueden correr en procesos separados y/o en el mismo proceso?
+    
+    \part ¿Se pueden crear \textit{n} threads de un proceso?
+    
+    \part ¿Los componentes de la vista (UI) de una aplicación son \textit{thread-safe}?, ¿Qué reglas sigue el \textit{Android's single thread model}?
+  \end{parts}
+
+  \question ¿Qué es \textit{DVM}?, ¿Por qué fue diseñada?. Compare este concepto con el de \textit{JVM}. Adicional mente compare el concepto de \textit{DVM} con el de \textit{ART} en base a \href{http://www.addictivetips.com/android/art-vs-dalvik-android-runtime-environments-explained-compared/}{este}\footnote{http://www.addictivetips.com/android/art-vs-dalvik-android-runtime-environments-explained-compared/} y \href{https://en.wikipedia.org/wiki/Android\_Runtime}{este}\footnote{https://en.wikipedia.org/wiki/Android\_Runtime} artículo.
+
+  \question ¿Qué es y de qué se encarga \textit{Zygote}?
 \end{questions}
 
 \subsection{Almacenamiento}
@@ -92,11 +102,9 @@
 \begin{questions}
   \question ¿Cuáles son los puntos de montaje principales del File System de Android?, ¿Qué contiene cada uno?
 
-  \question ¿Con qué tipos de memoria cuenta un dispositivo móvil generalemten?. Detalle cada uno y luego relacionelos con los tipos de file system que cada tipo podría soportar.
+  \question ¿Con qué tipos de memoria cuenta un dispositivo móvil generalmente?. Detalle cada uno y luego relacionelos con los tipos de file system que cada tipo podría soportar.
   
-  \question ¿Analice las principales características del file system utilizado hasta, generalmente, la versión 2.2 de Android? \textbf{Nota}: licencia, versiones y comparación entre ellas, tratamiento de archivos, \textit{theading}, etc.
-  
-  \question ¿Qué tipo de file system se tiende a utilizar desde la versión 2.3 de Android?, ¿Por qué?
+  \question Detalle las caracteristicas del \textit{YAFFS}.
 \end{questions}
 
 \subsection{Licencia}
@@ -110,7 +118,7 @@
 
 \subsection{Rooteo}
 \begin{questions}
-  \question ¿Qué significa rootear un dispositivo Android?
+  \question ¿Qué significa rootear un dispositivo Android?, ¿en qué se diferencia con el \textit{jailbreaking}?
 
   \question ¿Qué es el bootloader?, ¿De qué se encarga?, ¿Qué tipos existen?, ¿Qué consecuencias trae desbloquearlo?
   
@@ -118,7 +126,7 @@
   
   \question ¿Qué es el \textit{fastboot}?, ¿Qué acciones permite realizar?
   
-  \question ¿Qué es la \textit{boot.img}?, ¿Con qué herramienta se la puede dividir y con cuál crear?, ¿Qué contiene?, ¿Qué nombre tiene la imagen del \textit{kernel} de \textit{Linux}?, ¿En qué formato está empaquetado y comprimido el \textit{initramfs}?
+  \question ¿Qué es la \textit{boot.img}?, ¿Con qué herramienta se la puede dividir y con cuál crear?, ¿Qué contiene?, ¿Qué nombre tiene la imagen del \textit{kernel} de \textit{Linux}?, ¿y la de \textit{Android}?. ¿En qué formato está empaquetado y comprimido el \textit{initramfs}?
   
   \question ¿Para qué sirve el archivo \textit{default.prop} que esta dentro del \textit{initramfs}?, ¿Qué significa el prefijo \textit{ro}?, ¿A qué hace referencia la propiedad \textit{ro.secure}?
 \end{questions}

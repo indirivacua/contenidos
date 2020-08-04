@@ -11,6 +11,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.synced_folder '.', '/home/vagrant/contenidos'
+#  config.vm.synced_folder '~/Desktop', '/home/vagrant/desktop'
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update

@@ -1,0 +1,58 @@
+\paragraph{Lectura recomendada: \url{https://profs.info.uaic.ro/~busaco/teach/courses/net/docs/pthreads.pdf}}
+
+\begin{questions}
+
+\question Describir qué es un proceso e indicar sus propiedades.
+\question Describir qué es un thread e indicar sus propiedades. ¿A qué hacen
+          referencia los conceptos \textit{User Level Thread} y \textit{Kernel Level Thread}?
+          Indicar características principales de cada uno, así como sus diferencias.
+\question Indicar al menos 5 diferencias entre los procesos y los hilos.
+\question Analizar el siguiente código:
+  \begin{lstlisting}
+#include <pthread.h>
+#include <stdio.h>
+
+void print_message_function( void *ptr );
+
+int main() {
+  printf("Inicia el main \n");
+  pthread_t thread1, thread2;
+  char *message1 = "Hola";
+  char *message2 = "Mundo";
+  pthread_create(&thread1, NULL, (void*)&print_message_function, message1);
+  pthread_create(&thread2, NULL, (void*)&print_message_function, message2);
+  exit 0;
+}
+
+void print_message_function( void *ptr ) {
+  char *message;
+  message = (char *) ptr;
+  printf("%s \n", message);
+}
+  \end{lstlisting}
+
+\begin{parts}
+  \part Identificar el proceso y el/los hilo/s.
+  \part Compilar el programa utilizando el siguiente comando:
+    \begin{lstlisting}
+      $ gcc HelloWorld.c -o HelloWorld  -lpthread
+    \end{lstlisting}
+    \textit{Aclaración: la opción -l especifica que nuestro código utiliza una
+            librería, en este caso \textbf{pthreads}. En caso de que \textbf{pthreads}
+            no se encuentre instalada, debemos instalarla. En el caso de Debian:}
+            \begin{lstlisting}
+              # apt-get install libpthread-stubs0-dev
+            \end{lstlisting}
+  \part Ejecutar el programa reiteradas veces (al menos 15 ó 20):
+    \begin{lstlisting}
+      $ ./HelloWorld
+    \end{lstlisting}
+    ¿Cuál es el resultado que obtiene? Indicar al menos 2 inconvenientes que
+    pueda generar la ejecución del código compilado.
+\end{parts}
+
+\question Modificar el código del inciso anterior con el fin de planificar la ejecución de hilos. Para ello utilice la sentencia \textit{sleep}. ¿Qué inconvenientes encuentra? Explicar las razones y analizar posibles alternativas para solucionar el inconveniente planteado.
+
+\question Modificar nuevamente el código del inciso 4 de modo tal que la función \textit{main} registre e imprima en pantalla cuál fue el primer thread en ejecutarse. ¿Cómo lo haría? ¿Encuentra algún problema en su solución?
+
+\end{questions}

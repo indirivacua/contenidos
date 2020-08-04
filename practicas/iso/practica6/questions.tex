@@ -178,4 +178,67 @@ manera:
 	\part De acuerdo a la segunda fórmula, si cada inodo del disco ocupa 64 \bytes y hay 8 inodos por bloque de disco, el inodo 8 comienza en el desplazamiento 448 del bloque de disco. ¿Dónde empieza el 6? Si fueran inodos de 128 \bytes y 24 inodos por bloque: ¿dónde empezaría el inodo 8?
 \end{parts}
 
+\section{Laboratorio de Entrada-Salida}
+Se recomienda resolver este laboratorio con el Sistema en modo consola y con la menor cantidad de programas en ejecución posible.
+\question Instale e investigue para que sirve el siguiente programa hdparm
+\begin{verbatim}
+sudo apt-get install hdparm
+\end{verbatim}
+\question Ahora ejecute el siguiente comando:
+\begin{verbatim}
+sudo hdparm -I /dev/sda
+\end{verbatim}
+\begin{itemize}
+  \item ¿Cuando cilindros, cabezas y sectores tiene su disco?
+  \item ¿Que pasa si ejecuta esto en un disco de estado sólido?
+\end{itemize}
+\question Ahora ejecute el siguiente comando varias veces(al menos 5), de manera tal de poder calcular el promedio de resultados obtenidos
+\begin{verbatim}
+sudo hdparm  /dev/sda
+\end{verbatim}
+\question Ahora ejecutelo de la siguiente manera:
+\begin{verbatim}
+hdparm -t --direct  --offset 500  /dev/sda
+\end{verbatim}
+\question ¿Para que sirven los parámetros?:
+\begin{itemize}
+	\item direct
+	\item offset
+\end{itemize}
+\question Compare los tiempos promedios obtenidos con los parámetros direct y offset y sin ellos(Recuerde comparar tiempos promedio y no ejecuciones aisladas).
+\question ¿Con que concepto de la teoría asocia el parámetro direct?
+\question Ejecute el siguiente comando:
+\begin{verbatim}
+ls /sys/block/
+\end{verbatim}
+\question A que le parece que corresponde cada entrada del directorio anterior?
+\question Ejecute el siguiente comando(ajuste el dispoisitivo de disco según su equipo):
+\begin{verbatim}
+cat /sys/block/sda/queue/scheduler
+\end{verbatim}
+\question Investigue el resultado del comando anterior. ¿Que quiere decir cada item del resultado?, investigue cada uno de ellos y asocielo con conceptos de la teoría y de esta práctica. ¿Cual es la diferencia entre los siguientes conceptos? 
+\begin{itemize}
+	\item noop
+	\item deadline
+	\item cfq
+        \item Anticipatory IO
+\end{itemize}
+\question Como root, ejecute el siguiente comando
+\begin{verbatim}
+sudo echo "noop" > /sys/block/sda/queue/scheduler
+\end{verbatim}
+¿Cual es el efecto de esto?.Ayuda:vuelva a ejecutar
+\begin{verbatim}
+cat /sys/block/sda/queue/scheduler
+\end{verbatim}
+\question Ahora ejecute el siguiente programa al menos 5 veces, de manera tal de poder calcular el promedio del resultado obtenido
+\begin{verbatim}
+hdparm -t --direct  --offset 500  /dev/sda
+\end{verbatim}
+\question Ahora del mismo modo repita el paso con las demas opciones obtenidas en el ejercicio 29 y compare los resultados
+\begin{itemize}
+	\item ¿Cual le parece que debería ser mas óptimo?
+        \item ¿Porque?
+\end{itemize}
 \end{questions}
+

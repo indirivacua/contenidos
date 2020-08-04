@@ -6,162 +6,213 @@
 \begin{document}
 
 \title{\textit{Talk Show}}
-\subtitle{Práctca 1}
+\subtitle{Práctica 3}
 \begin{frame}
   \titlepage
 \end{frame}
 
 \begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Qué es una partición?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{¿Qué es una partición?}
+  \frametitle{¿Qué es un script?}
   \begin{itemize}
-	  \item División lóica de un disco físico
-	  \item Separación de datos
-	  \item Organización de la información
-	  \item ¿Ventajas?
-	  \item ¿Desventajas?
+	  \item ¿Para qué lo utilizarías?
+	  \item ¿Qué cosas podes hacer mediante un script?
+	  \item ¿Qué necesitás para ejecutarlo? ¿Cómo se ejecuta?
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Qué tipos de particiones hay?
-    \vfill
-  \end{center}
+  \frametitle{Conceptos principales de shell scripting}
+  \begin{itemize}
+	  \item Shebang
+    \item Sentencias
+    \item Tipos de variables
+    \item Asignaciones e interpolaciones
+    \item Funciones
+    \item Listas de elementos
+    \item Entrada/Salida
+    \item Sustitución de comandos
+    \item Redirecciones
+    \item Pipes
+    \item Variables especiales
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{¿Qué tipos de particiones hay?}
+\begin{frame}[fragile]
+  \frametitle{Shebang}
   \begin{itemize}
-	  \item Primarias
-	  \item Extendidas
-	  \item Lógicas
-	  \item ¿Cuántas se pueden tener?
-	  \item ¿Cuáles tienen formato?
+	  \item Línea con sentido especial dentro de un script: da un hint del comando a utilizar para ejecutar el archivo que contiene el script.
+	  \item Es opcional. De estar presente, debe ser la primer línea del archivo, y comenzar con \#!.
+	  \item Todo script retorna un exit status entre 0 y 255 (comando exit).
+    \item Ejemplos:
+		\begin{lstlisting}
+#!/bin/bash
+#!/usr/bin/env ruby
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Sentencias}
+  \begin{itemize}
+	  \item Las sentencias son secuencias de comandos, internos o externos a la shell, que se ejecutarán cuando el intérprete (Bash, en nuestro caso) las lea, según el flujo de ejecución del script.
+	  \item Todo comando que ingresamos en una terminal es una sentencia, y toda sentencia puede ser un comando que ingresemos manualmente en una terminal.
+    \item Ejemplos:
+		\begin{lstlisting}
+ls
+echo “Hola!”
+mkdir un_directorio
+cat /etc/passwd | cut -d: -f2
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Tipos de variables}
+  \begin{itemize}
+	  \item Las variables en Bash pueden tener dos tipos: general (simplifica pensarlos como un String) o arreglo.
+	  \item Las variables de tipo general se asignan y acceden directamente, mientras que las de tipo arreglo deben declararse con paréntesis alrededor de sus elementos iniciales y luego se acceden mediante el uso de índices (para indicar la posición deseada).
+    \item Ejemplos:
+		\begin{lstlisting}
+var=general
+var2="otra de tipo general"
+vacio=()
+arreglo=(1 dos 3)
+echo "var=$var y var2=$var2"
+echo "${arreglo[1]} ${#arreglo[*]}"
+for i in ${arreglo[*]}; do echo $i; done
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Asignaciones e interpolaciones}
+  \begin{itemize}
+	  \item Las asignaciones se realizan a través del caracter '='.
+	  \item Dicho caracter debe estar pegado a ambos lados de la asignación.
+    \item La interpolación permite sustituir el contenido de una variable dentro de un string literal siempre y cuando utilicemos comillas dobles.
+    \item Ejemplos:
+		\begin{lstlisting}
+x=100
+y='100$x'
+echo $y # ¿resultado?
+y="100$x" # ¿resultado?
+echo $y # ¿resultado?
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Funciones}
+  \begin{itemize}
+	  \item Declaración: f() { … } o function f() { … }.
+	  \item Permiten modularizar nuestro código, deben estar definidas antes de usarse. Deben retornar un valor entre 0 y 255 a través de la sentencia “return”. Si esta no existe retorna el exit status del último comando ejecutado. Una vez definidas, se las puede invocar como si fuera un comando interno más a nuestra shell.
+    \item Ejemplos:
+		\begin{lstlisting}
+myFn() { echo Hello world! }
+myFn
+myFn() { echo $1 }
+myFn 'Hello world!' # ¿qué pasa si lo ejecuto: myFn Hello world!?
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Listas de elementos}
+  \begin{itemize}
+	  \item En Bash, las listas de elementos son muy importantes. Nos permiten iterar sobre elementos, definen qué y cuántos argumentos recibe un script/binario, delimitan un comando de sus argumentos, etc.
+	  \item Por defecto, los separadores de elementos en una lista son los caracteres blancos (espacio, salto de línea, tabulación). Esto está definido por una variable interna del intérprete (\$IFS en Bash)
+    \item Ejemplos:
+		\begin{lstlisting}
+arr=(1 2 3 4 5)
+arr=(esto es un string) # ¿cuántos elementos tiene?
+arr=("esto es un string") # ¿y ahora?
+		\end{lstlisting}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Cómo se denominan los discos y las particiones en GNU/Linux?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{¿Cómo se denominan los discos y las particiones en GNU/Linux?}
+  \frametitle{Entrada/Salida}
   \begin{itemize}
-	  \item Discos: sda, sdb, sdc, sdd
-	  \item Particiones:
-	  \begin{itemize}
-	  	\item sda1, sda2, sda3, sda4, sdb1, ...
-	  	\item sda5, sda6, ...
-	  \end{itemize}
-	  \item Según el FHS, ¿dónde se ubican los archivos que identi can los dispositivos?
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Cuántas particiones \textbf{se \underline{requieren} como mínimo} para instalar GNU/Linux?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge /
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Cuántas particiones \textbf{se \underline{recomienda} tener como mínimo} para instalar GNU/Linux?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge /
-    \vfill
-    \vfill
-    \huge swap
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge Si quisieran instalar GNU/Linux para un \textbf{servidor de base de datos}.
-    \vfill
-    \vfill
-    \huge Este tipo de servicio genera \textbf{gran cantidad de datos variables}.
-    \vfill
-    \vfill
-    \huge ¿Cuántas particiones crearían? ¿cuáles y por qué?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge /
-    \vfill
-    \vfill
-    \huge swap
-    \vfill
-    \vfill
-    \huge /var
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \vfill
-    \huge ¿Qué es la \textbf{shell}?
-    \vfill
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{¿Qué es la shel?}
-  \begin{itemize}
-    \item Es un programa
-    \item Interfaz entre el usuario y el Sistema Operativo
-    \item Tiene comandos internos
-    \item Invoca comandos externos \textbf{(\$PATH)}
-    \item Con gurable por usuario:
+	  \item Mediante un script podemos manipular archivos.
+	  \item Todo proceso en un sistema operativo *nix tiene, por defecto, tres archivos abiertos:
     \begin{itemize}
-      \item /etc/passwd
-      \item chsh
+      \item \textbf{Entrada estándar (stdin)}: identificado con la file descriptor \textbf{0}.
+      \item \textbf{Salida estándar (stdout)}: identificado con la file descriptor \textbf{1}.
+      \item \textbf{Error estándar (stderr)}: identificado con la file descriptor \textbf{2}.
     \end{itemize}
+    \item Nos permiten leer y escribir información.
+  \end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Sustitución de comandos}
+  \begin{itemize}
+	  \item Muchas veces es necesario obtener el resultado de la evaluación de una sentencia en particular dentro de otra sentencia. Sería como una interpolación de la salida del subcomando en el lugar donde se realiza la sustitución.
+	  \item Este comportamiento se da debido a que la salida estándar (stout) del subcomando se reemplaza y se pega (sustituye) en el lugar donde se realiza la sustitución.
+    \item Se puede utilizar \$() o comillas francesas.
+    \item Ejemplos:
+		\begin{lstlisting}
+echo "Mi nombre de usuario es $(whoami)"
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Redirecciones}
+  \begin{itemize}
+	  \item Las redirecciones permiten "conectar" la entrada estándar (stdin) o las salidas (stdout y/o stderr) de un comando a un archivo.
+	  \item Útiles para guardar el resultado (la salida) de un comando o sus errores en un archivo, o para suministrar el contenido de un archivo como entrada de un comando.
+    \item Pueden ser destructivas o no.
+    \item Ejemplos:
+		\begin{lstlisting}
+echo Esto va a > un_archivo
+./mi_script < datos
+mysqldump db > dump.sql
+mysql db < dump.sql
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Pipes}
+  \begin{itemize}
+	  \item Así como las redirecciones comunican comandos con archivos, los Pipes (denotados con | en Bash) son un mecanismo de comunicación entre procesos.
+	  \item Conectan la salida estándar (stdout) de un comando con la entrada estándar (stdin) del siguiente, formando una comunicación lineal.
+    \item Pueden unirse tantos pipes como se desee, logrando que los comandos involucrados procesen secuencialmente la salida que reciben del comando anterior, y se la pasen al siguiente de la fila.
+    \item Ejemplos:
+		\begin{lstlisting}
+ps -fu $USER | tr -s ‘ ‘ | cut -d’ ‘ -f3 | xargs kill -9
+		\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Variables especiales}
+  \begin{itemize}
+    \item Existen algunas variables que tienen un significado especial, y cuyo valor es dado por Bash.
+	  \item Ejemplos:
+		\begin{lstlisting}
+$*
+$#
+$0
+$1 $2 $3 .. $9 ${10} ${11} ...
+$?
+$$
+$_
+$USER
+$HOME
+$PATH
+		\end{lstlisting}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{¿Qué \textbf{comandos} debo ejecutar para hacer esto?}
-  \begin{center}
-     Se desea crear en el \textbf{/home} un directorio llamado \textbf{iso} y dentro de este dos más llamados \textbf{explicaciones} y \textbf{practicas}. Además se quiere mover el contenido de \textbf{/tmp/info-iso/explicaciones} a \textbf{/home/iso/explicaciones} y el de \textbf{/tmp/info-iso/practicas} a \textbf{/home/iso/practicas}
-  \end{center}
+  \frametitle{Resolvamos juntos}
+  \begin{itemize}
+	  \item Ejercicio práctico 17
+    \item Ejercicio práctico 22
+    \item Repositorio de ejemplos de la cátedra: https://github.com/unlp-so/shell-scripts
+  \end{itemize}
 \end{frame}
 
 \end{document}
